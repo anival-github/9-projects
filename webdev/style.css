@@ -149,7 +149,7 @@ h3 {
 }
 
 .first-page-img {
-    background-image: url(../img/bg-image.png);
+    background-image: url(../blob/gh-pages/webdev/img/bg-image.png);
     width: 1600px;
     height: 744px;
     display: inline-block;
