@@ -1,0 +1,110 @@
+$primary-color: #F1CDB3;
+
+* {
+    margin: 0;
+    padding: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.logo__title {
+    color: $primary-color;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 32px;
+    letter-spacing: 6%;
+    line-height: 110%;
+}
+
+.logo__subtitle {
+    color: #FFFFFF;
+    font-size: 13px;
+    letter-spacing: 10%;
+    /* ПОЧЕМУТО НЕ ПРИМЕНИЛСЯ ЛЕттерспесинг */
+    line-height: 110%;
+}
+
+.menu {
+    display: flex;
+    width: 443px;
+
+}
+
+.list {
+    list-style-type: none;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.list__item {
+    display: flex;
+    align-items: center;
+}
+
+.list__link {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 160%;
+}
+
+.list__link_active {
+    border-bottom: solid 3px #F1CDB3;
+/* ИСПРАВИТЬ С УЧЕТОМ ТОГО ЧТО БУДУТ ССЫЛКИ */
+
+}
+
+.list__link_disabled {
+    color: #CDCDCD;
+}
+
+
+.header {
+    width: 100vw;
+    position: sticky;
+    top: 0;
+    background-color: black;
+}
+
+.wrapper {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1200px;
+    justify-content: space-between;
+}
+
+.hero {
+    display: flex;
+}
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-title {
+    color:  #FFFFFF;
+    font-size: 44px;
+    line-height: 130%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    max-width: 310px;
+
+}
+
+.hero-subtitle {
+    color: #CDCDCD;
+}
+
