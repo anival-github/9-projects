@@ -7,6 +7,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: black;
+}
+
 .logo {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -21,20 +25,16 @@
   color: #F1CDB3;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 32px;
-  letter-spacing: 0.12rem;
+  letter-spacing: 6%;
   line-height: 110%;
-  font-weight: 400;
 }
 
 .logo__subtitle {
-  margin-top: 10px;
   color: #FFFFFF;
   font-size: 13px;
+  letter-spacing: 10%;
   /* ПОЧЕМУТО НЕ ПРИМЕНИЛСЯ ЛЕттерспесинг */
   line-height: 110%;
-  text-align: center;
-  letter-spacing: 0.1rem;
-  font-weight: 400;
 }
 
 .menu {
@@ -65,11 +65,10 @@
 }
 
 .list__link {
-  color: #FFFFFF;
+  color: white;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
   line-height: 160%;
-  font-weight: 400;
 }
 
 .list__link_active {
@@ -83,8 +82,10 @@
 
 .header {
   width: 100vw;
-  position: absolute;
-  top: 60px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: black;
 }
 
 .wrapper {
@@ -102,21 +103,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding-top: 180px;
-}
-
-.main {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.hero-background {
-  background: url(/assets/noise_transparent.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
 }
 
 .hero-content {
@@ -130,7 +116,6 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding-bottom: 84px;
 }
 
 .hero-title {
@@ -139,23 +124,9 @@
   line-height: 130%;
   font-family: Georgia, 'Times New Roman', Times, serif;
   max-width: 310px;
-  font-weight: 400;
 }
 
 .hero-subtitle {
   color: #CDCDCD;
-  line-height: 160%;
-  margin-top: 42px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 400;
 }
-
-.hero-button {
-  width: 207px;
-  padding: 15px 45px;
-  border-radius: 100px;
-  border: none;
-  background-color: #F1CDB3;
-  margin-top: 42px;
-}
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=main copy.css.map */

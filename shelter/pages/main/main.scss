@@ -1,4 +1,17 @@
-$primary-color: #F1CDB3;
+$color-primary-color: #F1CDB3;
+$color-primary-light: #FDDCC4;
+
+$color-light-s: #FAFAFA;
+$color-light-l: #F6F6F6;
+$color-light-xl: #FFFFFF;
+
+$color-dark-s: #CDCDCD;
+$color-dark-m: #B2B2B2;
+$color-dark-l: #545454;
+$color-dark-xl: #4C4C4C;
+$color-dark-2xl: #444444;
+$color-dark-3xl: #292929;
+
 
 * {
     margin: 0;
@@ -9,10 +22,6 @@ $primary-color: #F1CDB3;
     box-sizing: border-box;
 }
 
-body {
-    background-color: black;
-
-}
 
 .logo {
     display: flex;
@@ -21,19 +30,23 @@ body {
 }
 
 .logo__title {
-    color: $primary-color;
+    color: $color-primary-color;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 32px;
-    letter-spacing: 6%;
+    letter-spacing: 0.12rem;
     line-height: 110%;
+    font-weight: 400;
 }
 
 .logo__subtitle {
-    color: #FFFFFF;
+    margin-top: 10px;
+    color: $color-light-xl;
     font-size: 13px;
-    letter-spacing: 10%;
     /* ПОЧЕМУТО НЕ ПРИМЕНИЛСЯ ЛЕттерспесинг */
     line-height: 110%;
+    text-align: center;
+    letter-spacing: 0.1rem;
+    font-weight: 400;
 }
 
 .menu {
@@ -55,28 +68,28 @@ body {
 }
 
 .list__link {
-    color: white;
+    color: $color-light-xl;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
     line-height: 160%;
+    font-weight: 400;
 }
 
 .list__link_active {
-    border-bottom: solid 3px #F1CDB3;
+    border-bottom: solid 3px $color-primary-color;
 /* ИСПРАВИТЬ С УЧЕТОМ ТОГО ЧТО БУДУТ ССЫЛКИ */
 
 }
 
 .list__link_disabled {
-    color: #CDCDCD;
+    color: $color-dark-s;
 }
 
 
 .header {
     width: 100vw;
-    position: sticky;
-    top: 0;
-    background-color: black;
+    position: absolute;
+    top: 60px;
 }
 
 .wrapper {
@@ -88,23 +101,53 @@ body {
 
 .hero {
     display: flex;
+    padding-top: 180px;
+
 }
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-background {
+    background: url(/assets/noise_transparent.png),
+    radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%),
+    #211F20;
+}
+
+
 .hero-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-bottom: 84px;
 }
 
 .hero-title {
-    color:  #FFFFFF;
+    color: $color-light-xl;
     font-size: 44px;
     line-height: 130%;
     font-family: Georgia, 'Times New Roman', Times, serif;
     max-width: 310px;
+    font-weight: 400;
 
 }
 
 .hero-subtitle {
-    color: #CDCDCD;
+    color: $color-dark-s;
+    line-height: 160%;
+    margin-top: 42px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
 }
 
+.hero-button {
+    width: 207px;
+    padding: 15px 45px;
+    border-radius: 100px;
+    border: none;
+    background-color: $color-primary-color;
+    margin-top: 42px;
+
+}
