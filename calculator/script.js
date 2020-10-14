@@ -1,94 +1,159 @@
-const numbers = document.querySelectorAll('.number');
-const operations = document.querySelectorAll('.operator');
-const clearBtns = document.querySelectorAll('.clear-btn');
-const decimalBtn = document.getElementById('decimal');
-const result = document.getElementById('result');
-const display = document.getElementById('display');
-let MemoryCurrentNumber = 0;
-let MemoryNewNumber = false;
-let MemoryPendingOperation = '';
+// 1. Забрать все кнопки в переменые
 
-for (var i = 0; i < numbers.length; i++) {
-  var number = numbers[i];
-  number.addEventListener('click', function (e) {
-    numberPress(e.target.textContent);
+let numbers = document.querySelectorAll('.number'),
+squareRootBtn = document.querySelector('.square-root'),
+operations = document.querySelectorAll('.operator'),
+decimal = document.querySelector('#decimal'),
+clearButtons = document.querySelectorAll('.clear-btn'),
+display = document.getElementById('display'),
+plusMinus = document.querySelector('.plus-minus'),
+
+MemoryCurrentNumber = 0,
+MemoryIsNewNumber = false,
+MemoryPendingOperation = '';
+
+// 2. Добавить обработчик событий (c сылками на функции)
+
+for (let i = 0; i <= numbers.length - 1; i += 1) {   // обработчик событий на все цифры
+  let number = numbers[i];
+  number.addEventListener('click', function(e) {
+    console.log(`Клик по кнопке ${e.target.textContent}`);
+    pressNumber(e.target.textContent);
+  });
+};
+
+for (let i = 0; i <= operations.length - 1; i += 1) {    // обработчик событий на все операции
+  let operation = operations[i];
+  operation.addEventListener('click',function(e) {
+    console.log(`Клик по кнопке ${e.target.textContent}`);
+    pressOperation(e.target.textContent);
   });
 }
 
-for (var i = 0; i < operations.length; i++) {
-  var operationBtn = operations[i];
-  operationBtn.addEventListener('click', function (e) {
-    operationPress(e.target.textContent);
+for (let i = 0; i <= clearButtons.length - 1; i += 1) {
+  let clearButton = clearButtons[i];
+  clearButton.addEventListener('click', function(e) {
+    console.log(`Клик по кнопке ${e.target.textContent}`);
+    clear(e.srcElement.id);
   });
 }
 
-for (var i = 0; i < clearBtns.length; i++) {
-  var clearBtn = clearBtns[i];
-  clearBtn.addEventListener('click', function (e) {
-    clear(e.target.textContent);
-  });
-}
+squareRootBtn.addEventListener('click', function(e){
+  console.log(`Клик по кнопке ${e.target.textContent}`);
+  squareRoot(e.target.textContent);
+});
 
-decimalBtn.addEventListener('click', decimal);
+plusMinus.addEventListener('click', function(e){
+  console.log(`Клик по кнопке ${e.target.textContent}`);
+  makeNegative();
+});
 
-function numberPress(number) {
-  if (MemoryNewNumber) {
-    display.value = number;
-    MemoryNewNumber = false;
+decimal.addEventListener('click', function(e){
+  console.log(`Клик по кнопке ${e.target.textContent}`);
+  pressDecimal();
+});
+
+// 3. Определяем все функции которые делает калькулятор
+
+function pressNumber(buttonNumber){
+  if (MemoryIsNewNumber === true) {
+    display.value = buttonNumber;
+    MemoryIsNewNumber = false;
   } else {
-    if (display.value === '0') {
-      display.value = number;
+    if ((display.value === '0') || (display.value === 'Error')) {
+      display.value = buttonNumber;
     } else {
-      display.value += number;
-    }
-  }
-}
+      display.value += buttonNumber;
+    };
+  };
+};
 
-function operationPress(op) {
-  let localOperationMemory = display.value;
 
-  if (MemoryNewNumber && MemoryPendingOperation !== '=') {
-    display.value = MemoryCurrentNumber;
+function pressDecimal(){
+  if (MemoryIsNewNumber === true){
+    display.value = '0.';
+    MemoryIsNewNumber = false;
   } else {
-    MemoryNewNumber = true;
-    if (MemoryPendingOperation === '+') {
-      MemoryCurrentNumber += +localOperationMemory;
-    } else if (MemoryPendingOperation === '-') {
-      MemoryCurrentNumber -= +localOperationMemory;
-    } else if (MemoryPendingOperation === '*') {
-      MemoryCurrentNumber *= +localOperationMemory;
-    } else if (MemoryPendingOperation === '/') {
-      MemoryCurrentNumber /= +localOperationMemory;
+    if (display.value === 'Error') {
+      display.value = '0.';
     } else {
-      MemoryCurrentNumber = +localOperationMemory;
-    }
-    display.value = MemoryCurrentNumber;
-    MemoryPendingOperation = op;
+      if (display.value.indexOf('.') === -1) {
+        display.value += ".";
+      };
+    };
+  };
+};
+
+function makeNegative(){
+  if (display.value !== 'Error'){
+    display.value = -(+display.value);
   }
 }
 
-function decimal(argument) {
-  let localDecimalMemory = display.value;
-
-  if (MemoryNewNumber) {
-    localDecimalMemory = '0.';
-    MemoryNewNumber = false;
-  } else {
-    if (localDecimalMemory.indexOf('.') === -1) {
-      localDecimalMemory += '.';
-    }
-  }
-  display.value = localDecimalMemory;
-}
-
-function clear(id) {
-  if (id === 'ce') {
+function clear(id){
+  if (id === "ce") {
     display.value = '0';
-    MemoryNewNumber = true;
+    MemoryIsNewNumber = true;
   } else if (id === 'c') {
     display.value = '0';
-    MemoryNewNumber = true;
+    MemoryIsNewNumber = true;
     MemoryCurrentNumber = 0;
     MemoryPendingOperation = '';
   }
 }
+
+function pressOperation(buttonOperation){
+  if (display.value !== 'Error'){
+    let localOperationMemory = display.value;
+    if ((MemoryIsNewNumber === true) && (MemoryPendingOperation !== '=')){
+      display.value = MemoryCurrentNumber;
+    } else {
+      let wrapper;
+      let symbolsAfterDropInLocal;
+      let symbolsAfterDropInMemory;
+      MemoryIsNewNumber = true;
+      if (MemoryPendingOperation === '+'){
+        symbolsAfterDropInMemory = (MemoryCurrentNumber.toString().includes('.')) ? (MemoryCurrentNumber.toString().split('.').pop().length) : (0);
+        symbolsAfterDropInLocal = (localOperationMemory.includes('.')) ? (localOperationMemory.split('.').pop().length) : (0);
+        wrapper = Math.max(symbolsAfterDropInMemory, symbolsAfterDropInLocal);
+        MemoryCurrentNumber += parseFloat(localOperationMemory);
+        MemoryCurrentNumber = +MemoryCurrentNumber.toFixed(wrapper)
+      } else if (MemoryPendingOperation === '-'){
+        symbolsAfterDropInMemory = (MemoryCurrentNumber.toString().includes('.')) ? (MemoryCurrentNumber.toString().split('.').pop().length) : (0);
+        symbolsAfterDropInLocal = (localOperationMemory.includes('.')) ? (localOperationMemory.split('.').pop().length) : (0);
+        wrapper = Math.max(symbolsAfterDropInMemory, symbolsAfterDropInLocal);
+        MemoryCurrentNumber -= parseFloat(localOperationMemory);
+        MemoryCurrentNumber = +MemoryCurrentNumber.toFixed(wrapper)
+      } else if (MemoryPendingOperation === '*'){
+        symbolsAfterDropInMemory = (MemoryCurrentNumber.toString().includes('.')) ? (MemoryCurrentNumber.toString().split('.').pop().length) : (0);
+        symbolsAfterDropInLocal = (localOperationMemory.includes('.')) ? (localOperationMemory.split('.').pop().length) : (0);
+        wrapper = symbolsAfterDropInMemory + symbolsAfterDropInLocal;
+        MemoryCurrentNumber *= parseFloat(localOperationMemory);
+        MemoryCurrentNumber = +MemoryCurrentNumber.toFixed(wrapper)
+      } else if (MemoryPendingOperation === '/'){
+        MemoryCurrentNumber /= parseFloat(localOperationMemory);
+      } else if (MemoryPendingOperation === '+/-'){
+        MemoryCurrentNumber =  -parseFloat(localOperationMemory);
+      } else if (MemoryPendingOperation === '^'){
+        MemoryCurrentNumber **= parseFloat(localOperationMemory);
+      } else {
+        MemoryCurrentNumber = parseFloat(localOperationMemory);
+      }
+       display.value = MemoryCurrentNumber;
+      MemoryPendingOperation = buttonOperation;
+    };
+  };
+};
+
+function squareRoot(sqrt){
+  if (display.value !== 'Error'){
+    let localMemorySQRT = display.value;
+    if (+localMemorySQRT < 0) {
+      display.value = "Error";
+    } else {
+      localMemorySQRT = Math.sqrt(localMemorySQRT);
+      display.value = localMemorySQRT;
+    };
+  };
+};
+
