@@ -7,7 +7,7 @@ body {
   padding-top: 40px;
 }
 .calc {
-  background-color: #1c93ee;
+  background: linear-gradient(to right, #00aaff, #00ff6c);
   width: 385px;
   padding: 30px;
   border-radius: 6px;
@@ -57,9 +57,7 @@ body {
 .btn-long {
   width: 183px;
 }
-.btn-equal {
-  height: 145px;
-}
+
 input,
 button {
   padding: 5px 15px;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">  
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <title>calculator</title>
@@ -17,13 +17,24 @@
           <table class="calc-table">
             <tr class="calc-buttons-row">
               <td>
-                <button type="button" class="clear-btn btn btn-hover-red" id="ce">ce</button>
+                <button type="button" class="plus-minus btn-hover-green btn">+/-</button>
+              </td>
+              <td>
+                <button type="button" class="square-root square-root btn-hover-orange btn">√</button>
+              </td>
+              <td>
+                <button type="button" class="operator elevate btn-hover-orange btn">^</button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-hover-orange" id="decimal">.</button>
+              </td>
+            </tr>
+            <tr class="calc-buttons-row">
+              <td colspan="2">
+                <button type="button" class="clear-btn btn btn-hover-red btn-long" id="ce">ce</button>
               </td>
               <td>
                 <button type="button" class="clear-btn btn btn-hover-red" id="c">c</button>
-              </td>
-              <td>
-                <button type="button" class="operator btn btn-hover-orange">/</button>
               </td>
               <td>
                 <button type="button" class=" operator btn btn-hover-orange">*</button>
@@ -67,16 +78,16 @@
               <td>
                 <button type="button" class="number btn-hover-green btn">3</button>
               </td>
-              <td rowspan="2">
-                <button type="button" class="operator btn btn-equal btn-hover-orange" id="result">=</button>
+              <td>
+                <button type="button" class="operator btn btn-hover-orange">/</button>
               </td>
             </tr>
             <tr class="calc-buttons-row">
               <td colspan="2">
                 <button type="button" class="number btn-hover-green btn btn-long">0</button>
               </td>
-              <td>
-                <button type="button" class="btn  btn-hover-orange" id="decimal">.</button>
+              <td colspan="2">
+                <button type="button" class="operator btn btn-equal btn-hover-orange btn-long" id="result">=</button>
               </td>
             </tr>
           </table>
