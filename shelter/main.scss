@@ -12,11 +12,11 @@ $color-dark-xl: #4C4C4C;
 $color-dark-2xl: #444444;
 $color-dark-3xl: #292929;
 
-$start-screen-gradient-background: url(/assets/noise_transparent.png),
+$start-screen-gradient-background: url(assets/noise_transparent.png),
 radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%),
 #211F20;
 
-$footer-gradient-background: url(/assets/noise_transparent.png),
+$footer-gradient-background: url(assets/noise_transparent.png),
 radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%),
  #211F20;
 
@@ -30,33 +30,19 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
     &:hover {
         background-color: $color-primary-light;
     }
-
     padding: 15px 45px;
     border-radius: 100px;
     border: none;
     font-size: 17px;
     line-height: 130%;
-    letter-spacing: 1.02px;
     cursor: pointer;
     outline: none;
-
-
-
     width: 261px;
-
-
-
-
-
-font-family: Georgia;
-font-style: normal;
-font-weight: normal;
-font-size: 17px;
-line-height: 130%;
-letter-spacing: 0.92px;
-color: #292929;
-
-
+    font-family: Georgia;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 0.92px;
+    color: #292929;
 }
 
 @mixin button_secondary {
@@ -132,8 +118,11 @@ letter-spacing: 2.1px;
         weight: normal;
         size: 15px;
         };
-        line-height: 160%;
+        // line-height: 160%;
+        line-height: 24px;
+
 }
+
 
 @mixin paragraph-s {
     font: {
@@ -289,6 +278,7 @@ letter-spacing: 2.1px;
         flex-direction: column;
         justify-content: center;
         padding-bottom: 84px;
+        padding-right: 42px;
     }
 
 }
@@ -309,15 +299,22 @@ letter-spacing: 2.1px;
     color: $color-light-xl;
     max-width: 310px;
     @include h2;
+    padding-top: 4px;
 }
 
 
 .content-section__subtitle {
     color: $color-dark-s;
-    line-height: 160%;
+    @include paragraph-l;
+    width: 460px;
+
+
+
+    // line-height: 160%;
     margin-top: 42px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 400;
+    // font-family: Arial, Helvetica, sans-serif;
+    // font-weight: 400;
+
 }
 
 .button-text {
@@ -339,7 +336,7 @@ margin: 0px 0px;
 
 .content-section__button {
     max-width: 207px;
-    margin-top: 42px;
+    margin-top: 40px;
     @include button_primary();
 }
 
@@ -355,7 +352,7 @@ margin: 0px 0px;
     }
 
     &__image {
-        width: 100%;
+        width: 420px;
         padding-right: 120px;
     }
 
@@ -391,6 +388,8 @@ margin: 0px 0px;
 .pets {
     padding-top: 80px;
     padding-bottom: 100px;
+    background-color: $color-light-l;
+
 
     &__wrapper {
         width: 100%;
@@ -421,24 +420,27 @@ margin: 0px 0px;
             }
 
             .pets-card {
+                width: 270px;
+                height: 435px;
+                background: $color-light-xl;
                 display: flex;
                 flex-direction: column;
+                justify-content: center;
+                align-items: center;
                 border-radius: 9px;
                 margin: 0 45px;
                 &:hover {
                     box-shadow: $card_hover;
                 }
 
-
                 &__image{
                     width: 100%;
-
                 }
 
                 &__content{
                     display: flex;
                     flex-direction: column;
-                    padding-bottom: 30px;
+                    // padding-bottom: 30px;
                     align-items: center;
                 }
 
@@ -451,8 +453,6 @@ margin: 0px 0px;
 
                 &__button{
                      @include button_secondary;
-
-
                 }
             }
 
@@ -464,14 +464,180 @@ margin: 0px 0px;
 
                    @include slider-button;
                }
-
         }
-
     }
     &__button{
         @include button_primary();
     }
 }
+
+
+
+.help {
+    width: 1200px;
+    padding: 80px 40px 100px 40px;
+
+    &-content {
+        height: 431px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        .heading {
+            @include h3;
+            max-width: 310px;
+            text-align: center;
+        }
+
+            .list {
+                padding-top: 60px;
+                width: 1200px;
+                height: 341px;
+                display: flex;
+                flex-wrap: wrap;
+                // margin: -60px;
+                justify-content: center;
+                align-content: space-between;
+                .help-card {
+                    margin-left: 60px;
+                    margin-right: 60px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+
+                    &_text {
+                        @include h4;
+                        padding-top: 30px;
+                    }
+
+
+                }
+
+
+        }
+
+    }
+}
+
+
+.donation {
+    background-color: $color-light-l;
+    display: flex;
+    justify-content: center;
+
+    &-content{
+        width: 1200px;
+        display: flex;
+        justify-content: center;
+        margin-top: 80px;
+        margin-bottom: 100px;
+        .donation-dog{
+            width: 505px;
+            height: 276px;
+            padding-top: 15px;
+        }
+
+        .donation-information {
+            padding-bottom: 3px;
+            margin-left: 30px;
+            max-width: 31.7%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .donation-header{
+                @include h3;
+                margin-bottom: 20px;
+                max-width: 300px;
+            }
+            .donation-subheader{
+                @include h5;
+                margin-bottom: 20px;
+            }
+            .credit-card {
+                margin-bottom: 20px;
+                @include h4;
+                display: flex;
+                background-color: $color-primary-color;
+                border-radius: 9px;
+                width: 349px;
+                height: 43px;
+                align-items: center;
+                justify-content: space-evenly;
+                &:hover {
+                    background-color: $color-primary-light;
+                }
+            }
+            .legal-info{
+                font-family: Arial, Helvetica, sans-serif;
+                font-style: italic;
+                font-weight: normal;
+                font-size: 12px;
+                line-height: 150%;
+                color: $color-dark-m;
+            }
+
+        }
+    }
+}
+
+
+.footer {
+    background: $footer-gradient-background;
+    &-content{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+        width: 1200px;
+        align-items: center;
+
+
+        .contacts {
+            width: 23.25%;
+            height: 264px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-bottom: 30px;
+        }
+        .location {
+            width: 25.17%;
+            height: 264px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-bottom: 30px;
+        }
+        .footer-title{
+            @include h3;
+            color: $color-light-xl;
+        }
+    }
+    .contact-details {
+        display: flex;
+        @include h4;
+        color: $color-primary-color;
+        align-items: center;
+        &__icon{
+            margin-right: 20px;
+        }
+    }
+}
+
+A{
+    color: inherit;
+
+    &:link{
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+
+
+
 
 
 
