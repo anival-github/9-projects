@@ -9,7 +9,7 @@ html{
 }
 
 body {
-  background-size: 100% 100%;
+  background-size: 100% 100% !important;
   transition: background-image 1s ease-in-out;
   font-family: 'Roboto Mono', monospace;
   height: 100vh;
