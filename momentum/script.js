@@ -50,16 +50,11 @@ function showDay() {
   let today = new Date(),
     date = today.getDate(),
     dayIndex = today.getDay(),
-
-    // Monday, December 26, 2016
-
-
     allDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     dayOfTheWeek = allDays[dayIndex],
     monthIndex = today.getMonth(),
     allMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     month = allMonth[monthIndex];
-
   day.innerHTML = `${dayOfTheWeek}<span>, </span>${month}<span> </span>${date}`;
   setTimeout(showDay, 1000);
 }
@@ -114,7 +109,7 @@ function showMorning() {
 }
 
 function showBackgrGreet() {
-  let today = new Date(2020, 10, 21, 13, 50, 50),
+  let today = new Date(),
     hours = today.getHours();
   if (hours < 6) { showNight() }
   else if (hours < 12) { showMorning() }
@@ -282,18 +277,18 @@ function hideCity(event) {
 // Weather
 async function getWeather() {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.innerText}&lang=en&appid=f1fe9aa9627ddefce0cda42a7d10e141&units=metric`;
-    const res = await fetch(url);
-    noMistakes = res.ok;
-    if (noMistakes === false && city.innerText !== '[Enter Your City]' ){
-      alert('There is no such a city')
-    }
-    const data = await res.json();
-    weatherIcon.className = 'weather-icon owf';
-    weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-    temperature.textContent = `${data.main.temp}°C`;
-    weatherDescription.textContent = data.weather[0].description;
-    humidity.textContent = `Humidity: ${data.main.humidity}%`
-    wind.textContent = `Wind: ${data.wind.speed}m/s`
+  const res = await fetch(url);
+  noMistakes = res.ok;
+  if (noMistakes === false && city.innerText !== '[Enter Your City]') {
+    alert('There is no such a city')
+  }
+  const data = await res.json();
+  weatherIcon.className = 'weather-icon owf';
+  weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+  temperature.textContent = `${data.main.temp}°C`;
+  weatherDescription.textContent = data.weather[0].description;
+  humidity.textContent = `Humidity: ${data.main.humidity}%`
+  wind.textContent = `Wind: ${data.wind.speed}m/s`
 }
 
 getWeather()
