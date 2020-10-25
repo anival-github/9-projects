@@ -66,7 +66,7 @@ function showNight() {
     img = document.createElement('img');
   img.src = src;
   img.onload = () => {
-    document.body.style.background = `url(${src})`;
+    document.body.style.background = `url(${src}) 0 0/cover no-repeat`;
   }
   greeting.textContent = 'Good Night,'
   document.body.style.color = 'white';
@@ -78,7 +78,7 @@ function showAfternoon() {
     img = document.createElement('img');
   img.src = src;
   img.onload = () => {
-    document.body.style.background = `url(${src})`;
+    document.body.style.background = `url(${src}) 0 0/cover no-repeat`;
   }
   greeting.textContent = 'Good Afternoon,'
   document.body.style.color = 'white';
@@ -90,7 +90,7 @@ function showEvening() {
     img = document.createElement('img');
   img.src = src;
   img.onload = () => {
-    document.body.style.background = `url(${src})`;
+    document.body.style.background = `url(${src}) 0 0/cover no-repeat`;
   }
   greeting.textContent = 'Good Evening,'
   document.body.style.color = 'white';
@@ -102,7 +102,7 @@ function showMorning() {
     img = document.createElement('img');
   img.src = src;
   img.onload = () => {
-    document.body.style.background = `url(${src})`;
+    document.body.style.background = `url(${src}) 0 0/cover no-repeat`;
   }
   greeting.textContent = 'Good Morning,'
   document.body.style.color = 'black';
