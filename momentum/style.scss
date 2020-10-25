@@ -1,0 +1,143 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html{
+  font-size: 20px;
+}
+
+body {
+  background-size: 100% 100%;
+  transition: background-image 1s ease-in-out;
+  font-family: 'Roboto Mono', monospace;
+  height: 100vh;
+  width: 100vw;
+  text-shadow: black 2px 3px 4px;
+  background-repeat: no-repeat;
+  background-position: center center;
+   .overlay{
+     background: url(assets/images/overlay.png);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: space-between;
+     text-align: center;
+     height: 100%;
+     width: 100%;
+     padding: 20px;
+     background-position: 0 0;
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+   }
+}
+
+.header{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .weather {
+    font-size: 1rem;
+  }
+  .city {
+    cursor: pointer;
+    &:hover{
+      color: black;
+      opacity: 0.7;
+      transition: all 0.5s ease-in-out;
+      text-shadow: white 2px 3px 4px;
+    }
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn {
+  opacity: 0.7;
+  width: 60px;
+  height: 60px;
+  border: 0;
+  background: url("https://www.pngarts.com/files/7/Update-Button-PNG-Image.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: grayscale(1);
+  margin: 10px;
+  cursor: pointer;
+  &:hover{
+    filter: grayscale(.8);
+  }
+  &:active{
+    transform: scale(1.02);
+    outline: 0;
+  }
+  &:focus {
+    outline: 0;
+  }
+}
+
+.main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .day {
+    font-size: 1.2rem;
+  }
+  .time {
+    font-size: 4rem;
+  }
+  .name {
+    width: 80vw;
+    margin-bottom: 1.4rem;
+    cursor: pointer;
+    &:hover{
+      color: black;
+      opacity: 0.7;
+      transition: all 0.5s ease-in-out;
+      text-shadow: white 2px 3px 4px;
+    }
+  }
+  h2 {
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+    font-size: 1.2rem;
+  }
+  .focus {
+    cursor: pointer;
+    width: 80vw;
+    &:hover{
+      color: black;
+      opacity: 0.7;
+      transition: all 0.5s ease-in-out;
+      text-shadow: white 2px 3px 4px;
+    }
+  }
+}
+
+.footer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .quote{
+    font-size: 1rem;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1279px) {
+  html {
+    font-size: 16px;
+  }
+}
