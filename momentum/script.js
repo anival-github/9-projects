@@ -50,13 +50,17 @@ function showDay() {
   let today = new Date(),
     date = today.getDate(),
     dayIndex = today.getDay(),
-    allDays = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+
+    // Monday, December 26, 2016
+
+
+    allDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     dayOfTheWeek = allDays[dayIndex],
     monthIndex = today.getMonth(),
-    allMonth = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'],
+    allMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     month = allMonth[monthIndex];
 
-  day.innerHTML = `${dayOfTheWeek}<span>, </span>${date}<span> </span>${month}`;
+  day.innerHTML = `${dayOfTheWeek}<span>, </span>${month}<span> </span>${date}`;
   setTimeout(showDay, 1000);
 }
 
