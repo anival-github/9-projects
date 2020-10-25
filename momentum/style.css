@@ -131,7 +131,12 @@ body .overlay {
   font-size: 4rem;
 }
 
+.main .greeting {
+  font-size: 1.2rem;
+}
+
 .main .name {
+  font-size: 1.2rem;
   width: 80vw;
   margin-bottom: 1.4rem;
   cursor: pointer;
