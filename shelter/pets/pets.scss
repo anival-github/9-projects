@@ -83,6 +83,16 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
     line-height: 130%;
     letter-spacing: 2.1px;
 }
+@mixin h3-mobile {
+    font: {
+        family: Georgia;
+        style: normal;
+        weight: normal;
+        size: 25px;
+    }
+    line-height: 130%;
+    letter-spacing: 2.1px;
+}
 
 @mixin h4 {
     font: {
@@ -338,8 +348,8 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
         align-items: center;
 
         .contacts {
-            width: 293px;
-            height: 234px;
+            width: 279px;
+            height: 272px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -347,7 +357,7 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
         }
         .location {
             width: 302px;
-            height: 234px;
+            height: 272px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -380,11 +390,9 @@ A {
 }
 
 @media screen and (max-width: 1279px){
-
     .wrapper{
         padding: 0 30px;
     }
-
     .friends-content{
         padding-bottom: 76px;
         gap: 30px;
@@ -395,23 +403,155 @@ A {
             height: 1365px;
         }
     }
-
     .footer-content{
         // margin-top: 30px;
         padding-top: 30px;
         justify-content: center;
         row-gap: 65px;
-        column-gap: 45px;
+        column-gap: 60px;
         .contacts{
             padding-bottom: 0;
+            height: 234px;
         }
         .location{
             padding-bottom: 0;
+            height: 234px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 767px){
+    .menu-icon {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    .nav{
+        margin-right: 43px;
+    }
+
+    .pets-header__content{
+        .nav-list{
+            display: none;
         }
     }
 
 
+    .wrapper{
+        padding: 0 10px;
+    }
+    .friends-content{
+        padding-top: 42px;
+        padding-bottom: 43px;
+        gap: 42px;
+        &__title{
+            @include h3-mobile;
+            letter-spacing: 0.06em;
+        }
+        &__cards{
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-bottom: 0;
+            height: 1365px;
+        }
+        .pagination{
+            gap: 10px;
+        }
+    }
+    .footer-content{
+        // margin-top: 30px;
+        padding-top: 30px;
+        justify-content: center;
+        row-gap: 40px;
+        column-gap: 60px;
+        .contacts{
+            padding-bottom: 0;
+            height: 208px;
+            align-items: center;
+            .footer-title {
+                @include h3-mobile();
+                text-align: center;
+                letter-spacing: 0.06em;
+            }
+        }
+        .location{
+            padding-bottom: 0;
+            height: 222px;
+            align-items: center;
+
+            .footer-title {
+                @include h3-mobile();
+                text-align: center;
+                letter-spacing: 0.06em;
+                width: 240px;
+            }
+            .contact-details{
+                width: 300px;
+            }
+        }
+        .footer-puppy {
+            width: 260px;
+            height: auto;
+        }
+    }
+}
 
 
 
+
+// Mobile navigation button
+
+.menu-icon {
+    display: none;
+    height: 30px;
+    width: 30px;
+}
+
+.menu-icon-line {
+    position: relative;
+    width: 30px;
+    height: 3px;
+    background-color: black;
+}
+.menu-icon-line::before{
+    position: absolute;
+    left: 0;
+    top: -10px;
+    content: '';
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: black;
+    transition: transform 0.2s ease-in, top 0.2s linear 0.2s;
+
+}
+
+.menu-icon-line::after{
+    position: absolute;
+    left: 0;
+    top: 10px;
+    content: '';
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: black;
+    transition: transform 0.2s ease-in, top 0.2s linear 0.2s;
+
+}
+
+.menu-icon.menu-icon-active .menu-icon-line{
+    background-color: transparent;
+}
+
+.menu-icon.menu-icon-active .menu-icon-line::before{
+    transform: rotate(45deg);
+    top: 0;
+    transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
+}
+
+.menu-icon.menu-icon-active .menu-icon-line::after{
+    transform: rotate(-45deg);
+    top: 0;
+    transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
 }

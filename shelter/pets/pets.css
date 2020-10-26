@@ -285,8 +285,8 @@
 }
 
 .footer-content .contacts {
-  width: 293px;
-  height: 234px;
+  width: 279px;
+  height: 272px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -302,7 +302,7 @@
 
 .footer-content .location {
   width: 302px;
-  height: 234px;
+  height: 272px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -376,14 +376,180 @@ A:link {
         -ms-flex-pack: center;
             justify-content: center;
     row-gap: 65px;
-    -webkit-column-gap: 45px;
-            column-gap: 45px;
+    -webkit-column-gap: 60px;
+            column-gap: 60px;
   }
   .footer-content .contacts {
     padding-bottom: 0;
+    height: 234px;
   }
   .footer-content .location {
     padding-bottom: 0;
+    height: 234px;
   }
+}
+
+@media screen and (max-width: 767px) {
+  .menu-icon {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+    -webkit-box-align: center !important;
+        -ms-flex-align: center !important;
+            align-items: center !important;
+  }
+  .nav {
+    margin-right: 43px;
+  }
+  .pets-header__content .nav-list {
+    display: none;
+  }
+  .wrapper {
+    padding: 0 10px;
+  }
+  .friends-content {
+    padding-top: 42px;
+    padding-bottom: 43px;
+    gap: 42px;
+  }
+  .friends-content__title {
+    font-family: Georgia;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 130%;
+    letter-spacing: 2.1px;
+    letter-spacing: 0.06em;
+  }
+  .friends-content__cards {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    height: 1365px;
+  }
+  .friends-content .pagination {
+    gap: 10px;
+  }
+  .footer-content {
+    padding-top: 30px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    row-gap: 40px;
+    -webkit-column-gap: 60px;
+            column-gap: 60px;
+  }
+  .footer-content .contacts {
+    padding-bottom: 0;
+    height: 208px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .footer-content .contacts .footer-title {
+    font-family: Georgia;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 130%;
+    letter-spacing: 2.1px;
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+  .footer-content .location {
+    padding-bottom: 0;
+    height: 222px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .footer-content .location .footer-title {
+    font-family: Georgia;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 130%;
+    letter-spacing: 2.1px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    width: 240px;
+  }
+  .footer-content .location .contact-details {
+    width: 300px;
+  }
+  .footer-content .footer-puppy {
+    width: 260px;
+    height: auto;
+  }
+}
+
+.menu-icon {
+  display: none;
+  height: 30px;
+  width: 30px;
+}
+
+.menu-icon-line {
+  position: relative;
+  width: 30px;
+  height: 3px;
+  background-color: black;
+}
+
+.menu-icon-line::before {
+  position: absolute;
+  left: 0;
+  top: -10px;
+  content: '';
+  display: block;
+  width: 30px;
+  height: 3px;
+  background-color: black;
+  -webkit-transition: top 0.2s linear 0.2s, -webkit-transform 0.2s ease-in;
+  transition: top 0.2s linear 0.2s, -webkit-transform 0.2s ease-in;
+  transition: transform 0.2s ease-in, top 0.2s linear 0.2s;
+  transition: transform 0.2s ease-in, top 0.2s linear 0.2s, -webkit-transform 0.2s ease-in;
+}
+
+.menu-icon-line::after {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  content: '';
+  display: block;
+  width: 30px;
+  height: 3px;
+  background-color: black;
+  -webkit-transition: top 0.2s linear 0.2s, -webkit-transform 0.2s ease-in;
+  transition: top 0.2s linear 0.2s, -webkit-transform 0.2s ease-in;
+  transition: transform 0.2s ease-in, top 0.2s linear 0.2s;
+  transition: transform 0.2s ease-in, top 0.2s linear 0.2s, -webkit-transform 0.2s ease-in;
+}
+
+.menu-icon.menu-icon-active .menu-icon-line {
+  background-color: transparent;
+}
+
+.menu-icon.menu-icon-active .menu-icon-line::before {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  top: 0;
+  -webkit-transition: top 0.2s linear, -webkit-transform 0.2s ease-in 0.2s;
+  transition: top 0.2s linear, -webkit-transform 0.2s ease-in 0.2s;
+  transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
+  transition: top 0.2s linear, transform 0.2s ease-in 0.2s, -webkit-transform 0.2s ease-in 0.2s;
+}
+
+.menu-icon.menu-icon-active .menu-icon-line::after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  top: 0;
+  -webkit-transition: top 0.2s linear, -webkit-transform 0.2s ease-in 0.2s;
+  transition: top 0.2s linear, -webkit-transform 0.2s ease-in 0.2s;
+  transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
+  transition: top 0.2s linear, transform 0.2s ease-in 0.2s, -webkit-transform 0.2s ease-in 0.2s;
 }
 /*# sourceMappingURL=pets.css.map */

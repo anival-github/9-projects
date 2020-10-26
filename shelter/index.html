@@ -21,6 +21,7 @@
                 </div>
             </div>
             <nav class="menu">
+                <!-- Навигация для десктопа -->
                 <ul class="list">
                     <li class="list__item">
                         <a class="list__link list__link_active">About the shelter</a>
@@ -35,6 +36,37 @@
                         <a class="list__link list__link_disabled">Contacts</a>
                     </li>
                 </ul>
+
+                <!-- Кнопка для мобильной навигации -->
+                <div id="menu-togle" class="menu-icon">
+                    <div class="menu-icon-line menu-icon-active"></div>
+                </div>
+
+                <!-- Мобильная навигация -->
+                <!-- <div id="mobile-nav" class="mobile-nav">
+                    <div class="logo">
+                        <h1 class="logo__title">
+                            Cozy House
+                        </h1>
+                        <div class="logo__subtitle">
+                            Shelter for pets in Boston
+                        </div>
+                    </div>
+                    <ul class="list_mobile">
+                        <li class="list__item_mobile">
+                            <a class="list__link_mobile list__link_active_mobile">About the shelter</a>
+                        </li>
+                        <li class="list__item_mobile">
+                            <a class="list__link_mobile list__link_disabled_mobile">Our pets</a>
+                        </li>
+                        <li class="list__item_mobile">
+                            <a class="list__link_mobile list__link_disabled_mobile">Help the shelter</a>
+                        </li>
+                        <li class="list__item_mobile">
+                            <a class="list__link_mobile list__link_disabled_mobile">Contacts</a>
+                        </li>
+                    </ul>
+                </div> -->
             </nav>
         </div>
     </header>
@@ -57,7 +89,7 @@
                             </p>
                         </button>
                     </div>
-                        <img class="hero__image" src="assets/start-screen-puppy.png" alt="Start screen puppy" />
+                    <img class="hero__image" src="assets/start-screen-puppy.png" alt="Start screen puppy" />
                 </div>
             </div>
         </div>
@@ -149,7 +181,7 @@
                 </div>
             </div>
         </div>
-        <div class="wrapper">
+        <div class="wrapper main-help">
             <div class="help">
                 <div class="help-content">
                     <h3 class="heading">
@@ -157,39 +189,45 @@
                     </h3>
                     <div class="list">
                         <div class="help-card">
-                            <img src="assets/svg/icon-pet-food.svg" alt="Pet food">
-                            <h4 class="help-card_text">Pet food</h4>
+                            <img src="assets/svg/icon-pet-food.svg" alt="Pet food" class="help-image">
+                            <h4 class="help-card_text">
+                                Pet food
+                            </h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-transportation.svg" alt="Transportation">
-                            <h4 class="help-card_text">Transportation</h4>
+                            <img src="assets/svg/icon-transportation.svg" alt="Transportation" class="help-image">
+                            <h4 class="help-card_text">
+                                Transportation
+                            </h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-toys.svg" alt="Toys">
-                            <h4 class="help-card_text">Toys</h4>
+                            <img src="assets/svg/icon-toys.svg" alt="Toys" class="help-image">
+                            <h4 class="help-card_text">
+                                Toys
+                            </h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-bowls-and-cups.svg" alt="Bowls and cups">
+                            <img src="assets/svg/icon-bowls-and-cups.svg" alt="Bowls and cups" class="help-image">
                             <h4 class="help-card_text">Bowls and cups</h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-shampoos.svg" alt="Shampoos">
+                            <img src="assets/svg/icon-shampoos.svg" alt="Shampoos" class="help-image">
                             <h4 class="help-card_text">Shampoos</h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-vitamins.svg" alt="Vitamins">
+                            <img src="assets/svg/icon-vitamins.svg" alt="Vitamins" class="help-image">
                             <h4 class="help-card_text">Vitamins</h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-medicines.svg" alt="Medicines">
+                            <img src="assets/svg/icon-medicines.svg" alt="Medicines" class="help-image">
                             <h4 class="help-card_text">Medicines</h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-collars-leashes.svg" alt="Collars / leashes">
+                            <img src="assets/svg/icon-collars-leashes.svg" alt="Collars / leashes" class="help-image">
                             <h4 class="help-card_text">Collars / leashes</h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-sleeping-area.svg" alt="Sleeping areas">
+                            <img src="assets/svg/icon-sleeping-area.svg" alt="Sleeping areas" class="help-image">
                             <h4 class="help-card_text">Sleeping areas</h4>
                         </div>
                     </div>
@@ -295,6 +333,7 @@
             </div>
         </footer>
     </main>
+    <script src="main.js"></script>
 </body>
 
 </html>
