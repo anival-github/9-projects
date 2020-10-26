@@ -21,6 +21,7 @@
                 </div>
             </div>
             <nav class="menu">
+                <!-- Навигация для десктопа -->
                 <ul class="list">
                     <li class="list__item">
                         <a class="list__link list__link_active">About the shelter</a>
@@ -35,40 +36,63 @@
                         <a class="list__link list__link_disabled">Contacts</a>
                     </li>
                 </ul>
+
+                <!-- Кнопка для мобильной навигации -->
+                <div id="menu-togle" class="menu-icon">
+                    <div class="menu-icon-line menu-icon-active"></div>
+                </div>
+
+                <!-- Мобильная навигация -->
+                <!-- <div id="mobile-nav" class="mobile-nav">
+                    <div class="logo">
+                        <h1 class="logo__title">
+                            Cozy House
+                        </h1>
+                        <div class="logo__subtitle">
+                            Shelter for pets in Boston
+                        </div>
+                    </div>
+                    <ul class="list_mobile">
+                        <li class="list__item_mobile">
+                            <a class="list__link_mobile list__link_active_mobile">About the shelter</a>
+                        </li>
+                        <li class="list__item_mobile">
+                            <a class="list__link_mobile list__link_disabled_mobile">Our pets</a>
+                        </li>
+                        <li class="list__item_mobile">
+                            <a class="list__link_mobile list__link_disabled_mobile">Help the shelter</a>
+                        </li>
+                        <li class="list__item_mobile">
+                            <a class="list__link_mobile list__link_disabled_mobile">Contacts</a>
+                        </li>
+                    </ul>
+                </div> -->
             </nav>
         </div>
     </header>
     <main class="main">
-
-        <!-- <div> // hero - gradient -->
         <div class="hero">
-
-            <div class="wrapper" style="height: 728px;">
-                <!-- <div class="hero"> -->
-                <div class="hero__content">
-                    <h2 class="content-section__title">
-                        Not only people need a house
-                    </h2>
-                    <p class="content-section__subtitle">
-                        We offer to give a chance to a little and nice puppy with an extremely wide and open heart. He
-                        or she will love you more than anybody else in the world, you will see!
-                    </p>
-                    <button type="button" class="content-section__button">
-                        <p class="button-text">
-                            Make a friend
+            <div class="wrapper">
+                <div class="hero-wrapper">
+                    <div class="hero__content">
+                        <h2 class="content-section__title">
+                            Not only people need a house
+                        </h2>
+                        <p class="content-section__subtitle">
+                            We offer to give a chance to a little and nice puppy with an extremely wide and open heart.
+                            He
+                            or she will love you more than anybody else in the world, you will see!
                         </p>
-                    </button>
-                </div>
-                <div class="hero__image-wrapper">
+                        <button type="button" class="content-section__button">
+                            <p class="button-text">
+                                Make a friend
+                            </p>
+                        </button>
+                    </div>
                     <img class="hero__image" src="assets/start-screen-puppy.png" alt="Start screen puppy" />
                 </div>
-                <!-- </div> -->
             </div>
         </div>
-
-        <!-- </div> -->
-
-
         <div class="about">
             <div class="wrapper">
                 <div class="about__image-wrapper">
@@ -108,13 +132,12 @@
                     </h3>
                     <div class="pets__content">
                         <button class="slider-button">
-                            <object data="assets/svg/Arrow_left.svg" type="image/svg+xml"
-                                class="header__burger-icon">
+                            <object data="assets/svg/Arrow_left.svg" type="image/svg+xml" class="header__burger-icon">
                             </object>
                         </button>
                         <div class="pets-cards">
                             <div class="pets-card">
-                                <img src="assets/katrine-photo.png" alt="Pet Katrine" class="pet-card__image">
+                                <img src="assets/pets-katrine-1.png" alt="Pet Katrine" class="pet-card__image">
                                 <div class="pets-card__content">
                                     <h4 class="pets-card__title">
                                         Katrine
@@ -125,7 +148,7 @@
                                 </div>
                             </div>
                             <div class="pets-card">
-                                <img src="assets/jennifer-photo.png" alt="Pet Jenifer" class="pet-cards__image">
+                                <img src="assets/pets-jennifer-1.png" alt="Pet Jenifer" class="pet-cards__image">
                                 <div class="pets-card__content">
                                     <h4 class="pets-card__title">
                                         Jennifer
@@ -136,7 +159,7 @@
                                 </div>
                             </div>
                             <div class="pets-card">
-                                <img src="assets/woody-photo.png" alt="Pet Woody" class="pet-cards__image">
+                                <img src="assets/pets-woody-1.png" alt="Pet Woody" class="pet-cards__image">
                                 <div class="pets-card__content">
                                     <h4 class="pets-card__title">
                                         Woody
@@ -148,8 +171,7 @@
                             </div>
                         </div>
                         <button class="slider-button_reverted">
-                            <object data="assets/svg/Arrow_left.svg" type="image/svg+xml"
-                                class="header__burger-icon">
+                            <object data="assets/svg/Arrow_left.svg" type="image/svg+xml" class="header__burger-icon">
                             </object>
                         </button>
                     </div>
@@ -159,47 +181,53 @@
                 </div>
             </div>
         </div>
-        <div class="wrapper">
+        <div class="wrapper main-help">
             <div class="help">
                 <div class="help-content">
-                        <h3 class="heading">
-                            How you can help our shelter
-                        </h3>
+                    <h3 class="heading">
+                        How you can help our shelter
+                    </h3>
                     <div class="list">
                         <div class="help-card">
-                            <img src="assets/svg/icon-pet-food.svg" alt="Pet food">
-                            <h4 class="help-card_text">Pet food</h4>
+                            <img src="assets/svg/icon-pet-food.svg" alt="Pet food" class="help-image">
+                            <h4 class="help-card_text">
+                                Pet food
+                            </h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-transportation.svg" alt="Transportation">
-                            <h4 class="help-card_text">Transportation</h4>
+                            <img src="assets/svg/icon-transportation.svg" alt="Transportation" class="help-image">
+                            <h4 class="help-card_text">
+                                Transportation
+                            </h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-toys.svg" alt="Toys">
-                            <h4 class="help-card_text">Toys</h4>
+                            <img src="assets/svg/icon-toys.svg" alt="Toys" class="help-image">
+                            <h4 class="help-card_text">
+                                Toys
+                            </h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-bowls-and-cups.svg" alt="Bowls and cups">
+                            <img src="assets/svg/icon-bowls-and-cups.svg" alt="Bowls and cups" class="help-image">
                             <h4 class="help-card_text">Bowls and cups</h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-shampoos.svg" alt="Shampoos">
+                            <img src="assets/svg/icon-shampoos.svg" alt="Shampoos" class="help-image">
                             <h4 class="help-card_text">Shampoos</h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-vitamins.svg" alt="Vitamins">
+                            <img src="assets/svg/icon-vitamins.svg" alt="Vitamins" class="help-image">
                             <h4 class="help-card_text">Vitamins</h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-medicines.svg" alt="Medicines">
+                            <img src="assets/svg/icon-medicines.svg" alt="Medicines" class="help-image">
                             <h4 class="help-card_text">Medicines</h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-collars-leashes.svg" alt="Collars / leashes">
+                            <img src="assets/svg/icon-collars-leashes.svg" alt="Collars / leashes" class="help-image">
                             <h4 class="help-card_text">Collars / leashes</h4>
                         </div>
                         <div class="help-card">
-                            <img src="assets/svg/icon-sleeping-area.svg" alt="Sleeping areas">
+                            <img src="assets/svg/icon-sleeping-area.svg" alt="Sleeping areas" class="help-image">
                             <h4 class="help-card_text">Sleeping areas</h4>
                         </div>
                     </div>
@@ -229,7 +257,9 @@
                         </div>
                         <div class="legal-info">
                             <span>
-                                Legal information and lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a ipsum at libero sagittis dignissim sed ac diam. Praesent ultrices maximus tortor et vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                                Legal information and lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+                                a ipsum at libero sagittis dignissim sed ac diam. Praesent ultrices maximus tortor et
+                                vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus.
                             </span>
                         </div>
                     </div>
@@ -247,7 +277,7 @@
                         </div>
                         <div class="contact-details">
                             <a href="mailto:email@shelter.com">
-                                <img src="assets/svg/icon-email.svg" alt="email icon" class="contact-details__icon" >
+                                <img src="assets/svg/icon-email.svg" alt="email icon" class="contact-details__icon">
                             </a>
                             <div>
                                 <span>
@@ -273,27 +303,37 @@
                             </span>
                         </div>
                         <div class="contact-details">
-                            <a href="https://www.google.com/maps/search/?api=1&query=760+West+Genesee+Street+Syracuse+NY+13204"><img src="assets/svg/pin.svg" alt="location icon" class="contact-details__icon"></a>
+                            <a
+                                href="https://www.google.com/maps/search/?api=1&query=760+West+Genesee+Street+Syracuse+NY+13204"><img
+                                    src="assets/svg/pin.svg" alt="location icon" class="contact-details__icon"></a>
                             <div>
                                 <span>
-                                    <a href="https://www.google.com/maps/search/?api=1&query=760+West+Genesee+Street+Syracuse+NY+13204">1 Central Street, Boston (entrance from the store)</a>
+                                    <a
+                                        href="https://www.google.com/maps/search/?api=1&query=760+West+Genesee+Street+Syracuse+NY+13204">1
+                                        Central Street, Boston (entrance from the store)</a>
                                 </span>
                             </div>
                         </div>
                         <div class="contact-details">
-                            <a href="https://www.google.com/maps/search/?api=1&query=760+West+Genesee+Street+Syracuse+NY+13204"><img src="assets/svg/pin.svg" alt="location icon" class="contact-details__icon"></a>
+                            <a
+                                href="https://www.google.com/maps/search/?api=1&query=760+West+Genesee+Street+Syracuse+NY+13204">
+                                <img src="assets/svg/pin.svg" alt="location icon" class="contact-details__icon">
+                            </a>
                             <div>
                                 <span>
-                                    <a href="https://www.google.com/maps/search/?api=1&query=760+West+Genesee+Street+Syracuse+NY+13204">18 South Park, London</a>
+                                    <a
+                                        href="https://www.google.com/maps/search/?api=1&query=760+West+Genesee+Street+Syracuse+NY+13204">18
+                                        South Park, London</a>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <img src="assets/footer-puppy.png" alt="footer puppy">
+                    <img src="assets/footer-puppy.png" alt="footer puppy" class="footer-puppy">
                 </div>
             </div>
         </footer>
     </main>
+    <script src="main.js"></script>
 </body>
 
 </html>
