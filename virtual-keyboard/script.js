@@ -3,7 +3,7 @@ function initRecognition() {
 
   let recognition = new SpeechRecognition()
 
-  recognition.interimResults = true
+  recognition.interimResults = false;
 
 
 
@@ -39,6 +39,8 @@ const keyboard = {
     voiceRecording: false,
     language: "en",
     recognition: window.initRecognition(),
+    caretPositionStart: 0,
+    caretPositionEnd: 0,
   },
 
   layoutsStandard: {
@@ -61,7 +63,7 @@ const keyboard = {
   layoutsShift: {
     english: [
       "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "backspace",
-      "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "{", "}", // обработать перенос строки при }
+      "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "{", "}",
       "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "\'", "enter",
       "shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "voice",
       "done", "lang", "space", "keyboard_arrow_left", "keyboard_arrow_right", "sound"
@@ -104,6 +106,8 @@ const keyboard = {
           element.value = currentValue;
         })
       })
+
+
     })
   },
 
@@ -149,7 +153,7 @@ const keyboard = {
         case "sound":
           keyElement.classList.add("keyboard__key--wide")
           keyElement.innerHTML = createIconHtml("volume_up");
-          keyElement.addEventListener("click", (e) => { //ДОБАВИТЬ ЗВУК НА КЛАВИШИ
+          keyElement.addEventListener("click", (e) => {
             this._toggleSound(e)
             this._playSound("default")
           })
@@ -159,9 +163,12 @@ const keyboard = {
           keyElement.classList.add("keyboard__key--wide")
           keyElement.innerHTML = createIconHtml("backspace");
           keyElement.addEventListener("click", () => {
-            this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1)
-            this._triggerEvent("oninput")
+            this.properties.value = this.properties.value.substring(0, this.properties.caretPositionStart - 1)
+              + this.properties.value.substring(this.properties.caretPositionStart)
+            this._triggerEvent("oninput", "backspace")
             this._playSound(key)
+            this.properties.caretPositionEnd -= 1
+            this.properties.caretPositionStart -= 1
           })
           break;
 
@@ -185,9 +192,16 @@ const keyboard = {
           keyElement.classList.add("keyboard__key--wide")
           keyElement.innerHTML = createIconHtml("keyboard_return");
           keyElement.addEventListener("click", () => {
-            this.properties.value += "\n";
+            let elem = document.querySelector('.use-keyboard-input')
+            this.properties.value = this.properties.value.substring(0, elem.selectionStart) + "\n" + this.properties.value.substring(elem.selectionEnd)
+            this.properties.caretPositionStart = elem.selectionStart
+            this.propertiescaretPositionEnd = elem.selectionEnd
+
+            // this.properties.value += "\n";
             this._triggerEvent("oninput")
             this._playSound(key)
+            this.properties.caretPositionEnd += 1
+            this.properties.caretPositionStart += 1
           })
           break;
 
@@ -196,9 +210,18 @@ const keyboard = {
           keyElement.classList.add("keyboard__key--extra-wide")
           keyElement.innerHTML = createIconHtml("space_bar");
           keyElement.addEventListener("click", () => {
-            this.properties.value += " ";
+            let elem = document.querySelector('.use-keyboard-input')
+            this.properties.value = this.properties.value.substring(0, elem.selectionStart) + " " + this.properties.value.substring(elem.selectionEnd)
+            this.properties.caretPositionStart = elem.selectionStart
+            this.propertiescaretPositionEnd = elem.selectionEnd
+
+
+
+            // this.properties.value += " ";
             this._triggerEvent("oninput")
             this._playSound("default")
+            this.properties.caretPositionEnd += 1
+            this.properties.caretPositionStart += 1
           })
           break;
 
@@ -266,18 +289,30 @@ const keyboard = {
           break;
 
 
-        default:  // ИСПРАВИТЬ БАГ С ВВОДОМ В СЕРЕДИНЕ СТРОКИ
+        default:
           keyElement.textContent = key.toLowerCase();
 
           let elem = document.querySelector('.use-keyboard-input')
 
           keyElement.addEventListener("click", (e) => {
-
+            let elem = document.querySelector('.use-keyboard-input');
+            console.log(elem.selectionStart);
+            console.log(elem.selectionEnd);
 
             this.properties.value = this.properties.value.substring(0, elem.selectionStart) + e.target.innerText + this.properties.value.substring(elem.selectionEnd)
+            this.properties.caretPositionStart = elem.selectionStart
+            this.propertiescaretPositionEnd = elem.selectionEnd
+
 
             this._triggerEvent("oninput")
             this._playSound("default")
+            this.properties.caretPositionEnd += 1
+            this.properties.caretPositionStart += 1
+
+
+
+            console.log(this.properties.value);
+
 
           });
           break;
@@ -292,11 +327,16 @@ const keyboard = {
     return fragment;
   },
 
-  _triggerEvent(handlerName) {
-    // console.log("Event triggered! Event name: " + handlerName);
-    // console.log(document.querySelector("body > textarea").oninput)
+  _triggerEvent(handlerName, button) {
     if (typeof this.eventHandlers[handlerName] == "function") {
       this.eventHandlers[handlerName](this.properties.value)
+      let elem = document.querySelector('.use-keyboard-input');
+      elem.focus()
+      if (button === "backspace") {
+        elem.setSelectionRange(this.properties.caretPositionStart - 1, this.properties.caretPositionEnd - 1)
+      } else {
+        elem.setSelectionRange(this.properties.caretPositionStart + 1, this.properties.caretPositionEnd + 1);
+      }
     }
   },
 
@@ -535,21 +575,18 @@ const keyboard = {
   _setCaretPosition(shiftDirection) {
 
     var elem = document.querySelector('.use-keyboard-input');
-
     if (elem != null) {
-
       elem.focus();
 
-      if (elem.selectionStart === elem.selectionEnd) {
 
+
+      if (elem.selectionStart === elem.selectionEnd) {
         if (shiftDirection === "right") {
           elem.setSelectionRange(elem.selectionStart + 1, elem.selectionEnd + 1);
         } else {
           elem.setSelectionRange(elem.selectionStart - 1, elem.selectionEnd - 1);
         }
-
       } else {
-
         if (shiftDirection === "right") {
           elem.setSelectionRange(elem.selectionStart, elem.selectionEnd + 1);
         } else {
@@ -557,6 +594,8 @@ const keyboard = {
         }
       }
     }
+    this.properties.caretPositionStart = elem.selectionStart
+    this.properties.caretPositionEnd = elem.selectionEnd
   },
 
 
@@ -575,6 +614,16 @@ const keyboard = {
     this.eventHandlers.oninput = oninput;
     this.eventHandlers.onclose = onclose;
     this.elements.main.classList.remove("keyboard--hidden");
+
+    document.querySelectorAll(".use-keyboard-input").forEach(element => {
+      element.addEventListener("click", (e) => {
+        e.preventDefault()
+        console.log(e.defaultPrevented);
+      })
+    })
+
+
+
   },
 
   close() {
@@ -612,7 +661,6 @@ const keyboard = {
 
 
   canselHighlighting(event) {
-    console.log(event.key);
     let currentButtonsArray = Array.from(document.querySelectorAll(".keyboard__keys")[0].children)
     let fisicalButtonValue = event.key
     currentButtonsArray.forEach(element => {
@@ -627,7 +675,7 @@ const keyboard = {
         element.classList.remove("keyboard__key--active")
       } else if (virtualButtonValue === "keyboard_arrow_right" && fisicalButtonValue === "ArrowRight") {
         element.classList.remove("keyboard__key--active")
-      } else if (virtualButtonValue === fisicalButtonValue && fisicalButtonValue!== "Shift" ) {
+      } else if (virtualButtonValue === fisicalButtonValue && fisicalButtonValue !== "Shift") {
         element.classList.remove("keyboard__key--active")
       }
     });
