@@ -3,6 +3,10 @@ function initRecognition() {
 
   let recognition = new SpeechRecognition()
 
+  recognition.interimResults = true
+
+
+
   recognition.onresult = (event) => {
     let transcript = event.results[0][0].transcript;
 
@@ -14,12 +18,12 @@ function initRecognition() {
 }
 
 
-
 const keyboard = {
   elements: {
     main: null,
     keysContainer: null,
     keys: [],
+    musicContainer: null,
   },
 
   eventHandlers: {
@@ -42,7 +46,7 @@ const keyboard = {
       "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace",
       "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]",
       "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "\'", "enter",
-      "shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?", "voice",
+      "shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "voice",
       "done", "lang", "space", "keyboard_arrow_left", "keyboard_arrow_right", "sound"
     ],
     russian: [
@@ -59,7 +63,7 @@ const keyboard = {
       "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "backspace",
       "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "{", "}", // обработать перенос строки при }
       "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "\'", "enter",
-      "shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?", "voice",
+      "shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "voice",
       "done", "lang", "space", "keyboard_arrow_left", "keyboard_arrow_right", "sound"
     ],
     russian: [
@@ -71,21 +75,27 @@ const keyboard = {
     ],
   },
 
+  sounds: ["tom.wav", "snare.wav", "boom.wav", "ride.wav", "openhat.wav", "clap.wav", "hihat.wav", "kick.wav", "default-sound-1.mp3", "default-sound-2.mp3"],
+
   init() {
     // Create main elements
     this.elements.main = document.createElement('div')
     this.elements.keysContainer = document.createElement('div')
+    this.elements.musicContainer = document.createElement('div')
 
     //SetUp classes
     this.elements.main.classList.add("keyboard", "keyboard--hidden")
     this.elements.keysContainer.classList.add("keyboard__keys")
     this.elements.keysContainer.appendChild(this._createKeys())
+    this.elements.musicContainer.classList.add("music")
+    this.elements.musicContainer.appendChild(this._createMusic())
 
     this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key')
 
     // Add to DOM
     this.elements.main.appendChild(this.elements.keysContainer)
     document.body.appendChild(this.elements.main)
+    document.body.appendChild(this.elements.musicContainer)
 
     // Use keyboard for all elements with the class use-keyboard-input
     document.querySelectorAll(".use-keyboard-input").forEach(element => {
@@ -95,18 +105,26 @@ const keyboard = {
         })
       })
     })
-
   },
+
+  _createMusic() {
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i <= 9; i += 1) {
+      let song = document.createElement('audio')
+      song.classList.add(`song-${i}`)
+      song.setAttribute('src', `sounds/${this.sounds[i]}`)
+      fragment.appendChild(song)
+    }
+
+    return fragment
+  },
+
 
   _createKeys() {
     const fragment = document.createDocumentFragment();
 
-    let keyLayout
-    if (this.properties.language === "ru") {
-      keyLayout = this.layoutsStandard.russian
-    } else {
-      keyLayout = this.layoutsStandard.english
-    }
+    let keyLayout = this.properties.language === "ru" ? this.layoutsStandard.russian : this.layoutsStandard.english;
 
     // Create HTML for an icon
     const createIconHtml = (icon_name) => {
@@ -133,6 +151,7 @@ const keyboard = {
           keyElement.innerHTML = createIconHtml("volume_up");
           keyElement.addEventListener("click", (e) => { //ДОБАВИТЬ ЗВУК НА КЛАВИШИ
             this._toggleSound(e)
+            this._playSound("default")
           })
           break;
 
@@ -142,6 +161,7 @@ const keyboard = {
           keyElement.addEventListener("click", () => {
             this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1)
             this._triggerEvent("oninput")
+            this._playSound(key)
           })
           break;
 
@@ -156,6 +176,7 @@ const keyboard = {
               this._toggleCapsLock("russian");
             }
             keyElement.classList.toggle("keyboard__key--active", this.properties.capsLock)
+            this._playSound(key)
           })
           break;
 
@@ -166,6 +187,7 @@ const keyboard = {
           keyElement.addEventListener("click", () => {
             this.properties.value += "\n";
             this._triggerEvent("oninput")
+            this._playSound(key)
           })
           break;
 
@@ -176,6 +198,7 @@ const keyboard = {
           keyElement.addEventListener("click", () => {
             this.properties.value += " ";
             this._triggerEvent("oninput")
+            this._playSound("default")
           })
           break;
 
@@ -186,6 +209,7 @@ const keyboard = {
           keyElement.addEventListener("click", () => {
             this.close();
             this._triggerEvent("onclose")
+            this._playSound("default")
           })
           break;
 
@@ -200,35 +224,35 @@ const keyboard = {
               this._toggleShift("russian");
             }
             keyElement.classList.toggle("keyboard__key--active", this.properties.shift)
+            this._playSound(key)
           })
           break;
-
-
 
         case "lang":
           keyElement.classList.add("keyboard__key--wide")
           keyElement.innerText = this.properties.language
           keyElement.addEventListener("click", (e) => {
             this._toggleLanguage()
-            e.currentTarget.innerText = e.currentTarget.innerText === "en" ? "ru" : "en"
+            e.currentTarget.innerText = e.currentTarget.innerText === "en" ? "ru" : "en";
+            this._playSound("default")
           })
           break;
 
-
-
         case "voice":
-          keyElement.classList.add("keyboard__key--wide")
+          keyElement.classList.add("keyboard__key--wide", "keyboard__key--activatable")
           keyElement.innerHTML = createIconHtml("record_voice_over");
           keyElement.addEventListener("click", (e) => {
             this._toggleVoice(e)
+            this._playSound("default")
+            keyElement.classList.toggle("keyboard__key--active")
           })
           break;
-
 
         case "keyboard_arrow_left":
           keyElement.innerHTML = createIconHtml("keyboard_arrow_left");
           keyElement.addEventListener("click", () => {
             this._setCaretPosition("left");
+            this._playSound("default")
           })
           break;
 
@@ -237,6 +261,7 @@ const keyboard = {
           keyElement.innerHTML = createIconHtml("keyboard_arrow_right");
           keyElement.addEventListener("click", () => {
             this._setCaretPosition("right");
+            this._playSound("default")
           })
           break;
 
@@ -248,15 +273,11 @@ const keyboard = {
 
           keyElement.addEventListener("click", (e) => {
 
-            console.log(elem.selectionStart);
-
 
             this.properties.value = this.properties.value.substring(0, elem.selectionStart) + e.target.innerText + this.properties.value.substring(elem.selectionEnd)
-            console.log(elem.selectionStart);
 
             this._triggerEvent("oninput")
-
-            console.log(elem.selectionStart);
+            this._playSound("default")
 
           });
           break;
@@ -272,8 +293,8 @@ const keyboard = {
   },
 
   _triggerEvent(handlerName) {
-    console.log("Event triggered! Event name: " + handlerName);
-    console.log(document.querySelector("body > textarea").oninput)
+    // console.log("Event triggered! Event name: " + handlerName);
+    // console.log(document.querySelector("body > textarea").oninput)
     if (typeof this.eventHandlers[handlerName] == "function") {
       this.eventHandlers[handlerName](this.properties.value)
     }
@@ -282,6 +303,12 @@ const keyboard = {
   _toggleShift(currentLanguage) {
     this.properties.shift = !this.properties.shift
 
+    this._changeLayout(currentLanguage)
+
+
+  },
+
+  _changeLayout(currentLanguage) {
     for (const key of this.elements.keys) {
       if (key.innerText === "Shift") continue
       if (key.innerText === "en") continue
@@ -389,6 +416,84 @@ const keyboard = {
 
   },
 
+  _playSound(button) {
+
+    switch (button) {
+      case "enter":
+        if (this.properties.soundOn && this.properties.language === "en") {
+          let audio = document.querySelector('.song-0')
+          audio.currentTime = 0
+          audio.play()
+        } else if (this.properties.soundOn && this.properties.language === "ru") {
+          let audio = document.querySelector('.song-1')
+          audio.currentTime = 0
+          audio.play()
+        }
+        break;
+
+      case "backspace":
+        if (this.properties.soundOn && this.properties.language === "en") {
+          let audio = document.querySelector('.song-2')
+          audio.currentTime = 0
+          audio.play()
+        } else if (this.properties.soundOn && this.properties.language === "ru") {
+          let audio = document.querySelector('.song-3')
+          audio.currentTime = 0
+          audio.play()
+        }
+        break;
+
+      case "shift":
+        if (this.properties.soundOn && this.properties.language === "en") {
+          let audio = document.querySelector('.song-4')
+          audio.currentTime = 0
+          audio.play()
+        } else if (this.properties.soundOn && this.properties.language === "ru") {
+          let audio = document.querySelector('.song-5')
+          audio.currentTime = 0
+          audio.play()
+        }
+        break;
+
+      case "shift":
+        if (this.properties.soundOn && this.properties.language === "en") {
+          let audio = document.querySelector('.song-4')
+          audio.currentTime = 0
+          audio.play()
+        } else if (this.properties.soundOn && this.properties.language === "ru") {
+          let audio = document.querySelector('.song-5')
+          audio.currentTime = 0
+          audio.play()
+        }
+        break;
+
+      case "caps":
+        if (this.properties.soundOn && this.properties.language === "en") {
+          let audio = document.querySelector('.song-6')
+          audio.currentTime = 0
+          audio.play()
+        } else if (this.properties.soundOn && this.properties.language === "ru") {
+          let audio = document.querySelector('.song-7')
+          audio.currentTime = 0
+          audio.play()
+        }
+        break;
+
+      case "default":
+        if (this.properties.soundOn && this.properties.language === "en") {
+          let audio = document.querySelector('.song-9')
+          audio.currentTime = 0.1
+          audio.play()
+        } else if (this.properties.soundOn && this.properties.language === "ru") {
+          let audio = document.querySelector('.song-8')
+          audio.currentTime = 0.1
+          audio.play()
+        }
+        break;
+    }
+
+  },
+
   _toggleSound(e) {
     this.properties.soundOn = !this.properties.soundOn
 
@@ -478,6 +583,56 @@ const keyboard = {
     this.eventHandlers.onclose = onclose;
     this.elements.main.classList.add("keyboard--hidden")
   },
+
+
+  highlightButton(event) {
+    let currentButtonsArray = Array.from(document.querySelectorAll(".keyboard__keys")[0].children)
+    let fisicalButtonValue = event.key
+    currentButtonsArray.forEach(element => {
+      let virtualButtonValue = element.innerText
+      if (virtualButtonValue === "backspace" && fisicalButtonValue === "Backspace") {
+        element.classList.add("keyboard__key--active")
+      } else if (virtualButtonValue === "keyboard_capslock" && fisicalButtonValue === "CapsLock") {
+        element.classList.toggle("keyboard__key--active")
+      } else if (virtualButtonValue === "Shift" && fisicalButtonValue === "Shift") {
+        element.classList.toggle("keyboard__key--active")
+      } else if (virtualButtonValue === "keyboard_return" && fisicalButtonValue === "Enter") {
+        element.classList.add("keyboard__key--active")
+      } else if (virtualButtonValue === "space_bar" && fisicalButtonValue === " ") {
+        element.classList.add("keyboard__key--active")
+      } else if (virtualButtonValue === "keyboard_arrow_left" && fisicalButtonValue === "ArrowLeft") {
+        element.classList.add("keyboard__key--active")
+      } else if (virtualButtonValue === "keyboard_arrow_right" && fisicalButtonValue === "ArrowRight") {
+        element.classList.add("keyboard__key--active")
+      } else if (virtualButtonValue === fisicalButtonValue) {
+        element.classList.add("keyboard__key--active")
+      }
+    });
+  },
+
+
+  canselHighlighting(event) {
+    console.log(event.key);
+    let currentButtonsArray = Array.from(document.querySelectorAll(".keyboard__keys")[0].children)
+    let fisicalButtonValue = event.key
+    currentButtonsArray.forEach(element => {
+      let virtualButtonValue = element.innerText
+      if (virtualButtonValue === "backspace" && fisicalButtonValue === "Backspace") {
+        element.classList.remove("keyboard__key--active")
+      } else if (virtualButtonValue === "keyboard_return" && fisicalButtonValue === "Enter") {
+        element.classList.remove("keyboard__key--active")
+      } else if (virtualButtonValue === "space_bar" && fisicalButtonValue === " ") {
+        element.classList.remove("keyboard__key--active")
+      } else if (virtualButtonValue === "keyboard_arrow_left" && fisicalButtonValue === "ArrowLeft") {
+        element.classList.remove("keyboard__key--active")
+      } else if (virtualButtonValue === "keyboard_arrow_right" && fisicalButtonValue === "ArrowRight") {
+        element.classList.remove("keyboard__key--active")
+      } else if (virtualButtonValue === fisicalButtonValue && fisicalButtonValue!== "Shift" ) {
+        element.classList.remove("keyboard__key--active")
+      }
+    });
+  }
+
 }
 
 
@@ -493,3 +648,13 @@ document.addEventListener('keydown', function (event) {
     alert('Отменить!')
   }
 });
+
+
+document.addEventListener('keydown', (event) => {
+  keyboard.highlightButton(event)
+});
+
+document.addEventListener('keyup', (event) => {
+  keyboard.canselHighlighting(event)
+});
+

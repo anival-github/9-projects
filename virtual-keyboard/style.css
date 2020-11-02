@@ -54,8 +54,12 @@
   background: rgba(255, 255, 255, 0.12);
 }
 
+.keyboard__key--active {
+  background: rgba(255, 255, 255, 0.685);
+}
+
 .keyboard__key--wide {
-  width: 12%;
+  width: 9%;
   max-width: 180px;
   min-width: 30px;
 }
