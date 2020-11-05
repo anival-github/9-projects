@@ -1,0 +1,9 @@
+.puzzle-game {
+    padding: 0 20px;
+}
+
+@media screen and (max-width: 320px) {
+    .puzzle-game {
+        padding: 0 10px;
+    }
+}
