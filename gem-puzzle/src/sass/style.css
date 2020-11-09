@@ -73,60 +73,8 @@ button {
       grid-template-areas: "p0 p1 p2" "p3 p4 p5" "p6 p7 p8";
   max-height: 600px;
   height: calc(100vw);
-}
-
-.puzzles .puzzle-1 {
-  -ms-grid-row: 1;
-  -ms-grid-column: 2;
-  grid-area: p1;
-}
-
-.puzzles .puzzle-2 {
-  -ms-grid-row: 1;
-  -ms-grid-column: 3;
-  grid-area: p2;
-}
-
-.puzzles .puzzle-3 {
-  -ms-grid-row: 2;
-  -ms-grid-column: 1;
-  grid-area: p3;
-}
-
-.puzzles .puzzle-4 {
-  -ms-grid-row: 2;
-  -ms-grid-column: 2;
-  grid-area: p4;
-}
-
-.puzzles .puzzle-5 {
-  -ms-grid-row: 2;
-  -ms-grid-column: 3;
-  grid-area: p5;
-}
-
-.puzzles .puzzle-6 {
-  -ms-grid-row: 3;
-  -ms-grid-column: 1;
-  grid-area: p6;
-}
-
-.puzzles .puzzle-7 {
-  -ms-grid-row: 3;
-  -ms-grid-column: 2;
-  grid-area: p7;
-}
-
-.puzzles .puzzle-8 {
-  -ms-grid-row: 3;
-  -ms-grid-column: 3;
-  grid-area: p8;
-}
-
-.puzzles .puzzle-0 {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-  grid-area: p0;
+  -webkit-transition: all 3s;
+  transition: all 3s;
 }
 
 .puzzles__item {
@@ -143,6 +91,8 @@ button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-transition: all 3s;
+  transition: all 3s;
 }
 
 .puzzles__item--filled {

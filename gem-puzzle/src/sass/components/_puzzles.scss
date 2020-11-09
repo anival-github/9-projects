@@ -1,3 +1,4 @@
+
 .puzzles {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -7,35 +8,7 @@
     "p6 p7 p8";
     max-height: $content-width;
     height: calc(100vw);
-
-
-    .puzzle-1 {
-        grid-area: p1;
-    }
-    .puzzle-2 {
-        grid-area: p2;
-    }
-    .puzzle-3 {
-        grid-area: p3;
-    }
-    .puzzle-4 {
-        grid-area: p4;
-    }
-    .puzzle-5 {
-        grid-area: p5;
-    }
-    .puzzle-6 {
-        grid-area: p6;
-    }
-    .puzzle-7 {
-        grid-area: p7;
-    }
-    .puzzle-8 {
-        grid-area: p8;
-    }
-    .puzzle-0 {
-        grid-area: p0;
-    }
+    transition: all 3s;
 
     &__item {
         border: 1px solid black;
@@ -45,7 +18,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
+        transition: all 3s;
+     }
 
     &__item--filled {
         background-color: $color-primary;
@@ -65,4 +39,5 @@
 
     &__item--inactive {
     }
+
 }
