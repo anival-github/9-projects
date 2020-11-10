@@ -1,3 +1,5 @@
+console.log('Hello Valentin!')
+
 
 const gemPuzzle = {
 
@@ -13,15 +15,11 @@ const gemPuzzle = {
         menu: null,
         menuButtons: ['Scores', 'New game', `Field type`, 'Sound', 'Pause', 'Change Image'],
         scoresInfo: null,
-        empty: null,
-        cells: [],
     },
 
     properties: {
         layout: "4*4",
         puzzlesNumber: 0,
-        rowLength: null,
-        cellSize: null,
         currentField: null,
         gridTemplateArea: null,
 
@@ -93,10 +91,6 @@ const gemPuzzle = {
         gameWrapper.appendChild(this.elements.field)
         this.elements.field.appendChild(this.elements.puzzlesContainer)
         this.elements.puzzlesContainer.appendChild(this._createPuzzles())  // ФУНКЦИЯ ПО ДОБАВЛЕНИЮ ПАЗЛОВ
-        this.elements.puzzlesContainer.addEventListener('dragover', this._dragOver)
-        this.elements.puzzlesContainer.addEventListener('dragenter', this._dragEnter)
-        this.elements.puzzlesContainer.addEventListener('dragleave', this._dragLeave)
-        this.elements.puzzlesContainer.addEventListener('drop', this._dragDrop)
 
         this.elements.puzzles = this.elements.puzzlesContainer.querySelectorAll('.puzzles__item')
 
@@ -170,67 +164,65 @@ const gemPuzzle = {
                 break;
         }
 
-        // ВОТ ТУТ МЕНЯЕМ ВСЕ С ГРИДА НА ПОЗИШН АБСОЛЮТ                      МЕНЯЕМ
-
-        this.properties.rowLength = Math.sqrt(this.properties.puzzlesNumber)
-
-        const numbers = [...Array(this.properties.puzzlesNumber).keys()]
-            .sort(() => Math.random() - 0.5)
-
-        this.elements.cells = []
+        // ВОТ ТУТ МЕНЯЕМ ВСЕ С ГРИДА НА ПОЗИШН АБСОЛЮТ
 
         for (let i = 0; i < this.properties.puzzlesNumber; i += 1) {
-            const puzzleElement = document.createElement('div')
-            this.properties.cellSize = 100 / this.properties.rowLength
+            let puzzleElement = document.createElement('div')
+            puzzleElement.classList.add(`puzzle-${i}`)
+            puzzleElement.setAttribute('id', `${i}`)
 
-            if (numbers[i] === 0) {
-                const left = i % (this.properties.rowLength)
-                const top = (i - left) / this.properties.rowLength
-
-                this.elements.empty = {
-                    value: numbers[i],
-                    left: left,
-                    top: top,
-                }
-
-                this.elements.cells.push(this.elements.empty)
-
+            if (i === 0) {
+                puzzleElement.classList.add('puzzles__item', 'puzzles__item--empty')
             } else {
-                puzzleElement.classList.add('puzzles__item', 'puzzles__item--filled')
-                puzzleElement.setAttribute('draggable', 'true')
-                const value = numbers[i]
-                puzzleElement.innerText = value
-
-                const left = i % (this.properties.rowLength)
-                const top = (i - left) / this.properties.rowLength
-
-                puzzleElement.style = `top: ${top * this.properties.cellSize}%;
-                                      left: ${left * this.properties.cellSize}%;
-                                      width: ${this.properties.cellSize}%;
-                                      height: ${this.properties.cellSize}%;`
-
-                this.elements.cells.push({
-                    value: value,
-                    left: left,
-                    top: top,
-                    element: puzzleElement,
-                })
-
-                puzzleElement.addEventListener('dragstart', (e) => {
-                    this._dragStart(e)
-                })
-                puzzleElement.addEventListener('dragend', (e) => {
-                    this._dragEnd(e, left, top, i)
-                })
+                puzzleElement.classList.add('puzzles__item', 'puzzles__item--filled', 'puzzles__item--inactive')
+                puzzleElement.innerText = i
+                puzzleElement.style = `grid-area: p${i};`
                 puzzleElement.addEventListener('click', (e) => {
-                    this._shiftPuzzle(e, left, top, i)
+                    this._shiftPuzzle(e)
                     this._playSound()
                 })
             }
             fragment.appendChild(puzzleElement)
         }
 
+        // Create grid styles
+        function createMatrix(rows) {
+            let arr = [];
+            let counter = 0;
+            for (var i = 0; i < rows; i++) {
+                arr[i] = [];
+                for (let j = 0; j < rows; j++) {
+                    arr[i][j] = `p${counter}`
+                    counter += 1
+                }
+            }
+            return arr;
+        }
+
+        this.properties.currentField = createMatrix(Math.sqrt(this.properties.puzzlesNumber))
+        this._mixPuzzles()
+        this._createGridArea()
+        this._addGridToPuzzleContainer()
         return fragment
+    },
+
+    _mixPuzzles(){
+        console.log(this.properties.currentField);
+        console.log(Math.random() * 16);
+
+    },
+
+    // Create GRID AREA TO BE INCLUDED IN CSS STYLES
+    _createGridArea() {
+        let arrayForGrid = this.properties.currentField.map(element => element.join(' ')).join('" "')
+        this.properties.gridTemplateArea = `"${arrayForGrid}"`
+    },
+
+    // CHANGE PUZZLE CONTAINER STYLE by including grid area
+    _addGridToPuzzleContainer() {
+        this.elements.puzzlesContainer.style =
+            `grid-template-columns: repeat(${Math.sqrt(this.properties.puzzlesNumber)}, 1fr);
+            grid-template-areas: ${this.properties.gridTemplateArea};`
     },
 
     _createButtons() {
@@ -314,41 +306,61 @@ const gemPuzzle = {
 
     },
 
-    _shiftPuzzle(e, left, top, index) {
-        const cell = this.elements.cells[index]
+    _shiftPuzzle(e) {
+        // Reciece the current puzzle coordinates within the grid field
+        const puzzleCoordinates = this._getPuzzleCoordinates(e.target.id, this.properties.currentField)
+        const x = puzzleCoordinates[1]
+        const y = puzzleCoordinates[0]
 
-
-        const leftDiff = Math.abs(this.elements.empty.left - cell.left)
-        const topDiff = Math.abs(this.elements.empty.top - cell.top)
-
-        if (leftDiff + topDiff > 1) {
-            return
+        // Identify coordinates of Up, Dowm, Left and Right puzzles in the currentField (grid)
+        // If so - identify the grid index of Up, Dowm, Left and Right puzzles
+        const puzzleUpCoordinates = [y - 1, x]
+        let puzzleUpGridIndex
+        if (y - 1 >= 0) {
+            puzzleUpGridIndex = this.properties.currentField[y - 1][x];
         }
 
-        cell.element.style = `top: ${this.elements.empty.top * this.properties.cellSize}%;
-                          left: ${this.elements.empty.left * this.properties.cellSize}%;
-                          width: ${this.properties.cellSize}%;
-                          height: ${this.properties.cellSize}%`
-
-        const emptyLeft = this.elements.empty.left
-        const emptyTop = this.elements.empty.top
-        this.elements.empty.left = cell.left
-        this.elements.empty.top = cell.top
-        cell.left = emptyLeft
-        cell.top = emptyTop
-
-        const isFinished = this.elements.cells.every(cell => {
-            return cell.value === cell.top * 4 + cell.left
-        })
-
-        function greetWinner() {
-            alert('Congratulations! You won!')
+        const puzzleDownCoordinates = [y + 1, x]
+        let puzzleDownGridIndex
+        if (y + 1 <= this.properties.currentField.length - 1) {
+            puzzleDownGridIndex = this.properties.currentField[y + 1][x]
         }
 
-        if (isFinished) {
-            setTimeout(greetWinner, 600)
+        const puzzleRightCoordinates = [y, x + 1]
+        let puzzleRightGridIndex
+        if (x + 1 <= this.properties.currentField[y].length - 1) {
+            puzzleRightGridIndex = this.properties.currentField[y][x + 1]
         }
 
+        const puzzleLeftCoordinates = [y, x - 1]
+        let puzzleLeftGridIndex
+        if (x - 1 >= 0) {
+            puzzleLeftGridIndex = this.properties.currentField[y][x - 1]
+        }
+
+        // If Up, Dowm, Left or Right puzzles have grid index p0 - change it with current puzzle
+        if (puzzleUpGridIndex === 'p0') {
+            this.properties.currentField[y - 1][x] = `p${e.target.id}`
+            this.properties.currentField[y][x] = `p0`
+        }
+        if (puzzleDownGridIndex === 'p0') {
+            this.properties.currentField[y + 1][x] = `p${e.target.id}`
+            this.properties.currentField[y][x] = `p0`
+        }
+        if (puzzleRightGridIndex === 'p0') {
+            this.properties.currentField[y][x + 1] = `p${e.target.id}`
+            this.properties.currentField[y][x] = `p0`
+        }
+        if (puzzleLeftGridIndex === 'p0') {
+            this.properties.currentField[y][x - 1] = `p${e.target.id}`
+            this.properties.currentField[y][x] = `p0`
+        }
+
+
+        console.log(e.target);
+
+        this._createGridArea()
+        this._addGridToPuzzleContainer()
     },
 
     _endGame() {
@@ -368,8 +380,7 @@ const gemPuzzle = {
     },
 
     _pressNewGame() {
-        this.elements.puzzlesContainer.innerHTML = ''
-        this.elements.puzzlesContainer.appendChild(this._createPuzzles())
+
     },
 
     _changeLayOut(e) {
@@ -386,9 +397,6 @@ const gemPuzzle = {
         //Change the layout
         this.elements.puzzlesContainer.innerHTML = ''
         this.elements.puzzlesContainer.appendChild(this._createPuzzles())
-
-
-        // СОХРАНЯТЬ В ЛОКАЛ СТОР ТЕКУЩИЙ ЛЭЙАУТ
     },
 
     _changeImage() {
@@ -411,74 +419,29 @@ const gemPuzzle = {
 
     },
 
-    _dragStart(e) {
-        console.log(e.target);
-        setTimeout(() => {
-            e.target.classList.add('puzzles__item--hide')
-        }, 0)
-    },
 
-    _dragEnd(e, left, top, index){
-        e.target.classList.remove('puzzles__item--hide')
+    _getPuzzleCoordinates(puzzleId, field) {
+        let coordinates = []
+        let x, y
 
-        const cell = this.elements.cells[index]
+        for (let i = 0; i < field.length; i++) {
+            // console.log(field[i]);
 
+            for (let j = 0; j < field[i].length; j++) {
+                // console.log(field[i][j]);
 
-        const leftDiff = Math.abs(this.elements.empty.left - cell.left)
-        const topDiff = Math.abs(this.elements.empty.top - cell.top)
+                if (field[i][j] === `p${puzzleId}`) {
 
-        if (leftDiff + topDiff > 1) {
-            return
+                    x = j
+                    y = i
+
+                }
+            }
+
         }
-
-        cell.element.style = `top: ${this.elements.empty.top * this.properties.cellSize}%;
-                          left: ${this.elements.empty.left * this.properties.cellSize}%;
-                          width: ${this.properties.cellSize}%;
-                          height: ${this.properties.cellSize}%`
-
-        const emptyLeft = this.elements.empty.left
-        const emptyTop = this.elements.empty.top
-        this.elements.empty.left = cell.left
-        this.elements.empty.top = cell.top
-        cell.left = emptyLeft
-        cell.top = emptyTop
-
-        const isFinished = this.elements.cells.every(cell => {
-            return cell.value === cell.top * 4 + cell.left
-        })
-
-        function greetWinner() {
-            alert('Congratulations! You won!')
-        }
-
-        if (isFinished) {
-            setTimeout(greetWinner, 600)
-        }
-
-    },
-
-    _dragOver(e){
-        e.preventDefault();
-
-        // console.log('over');
-
-    },
-    _dragEnter(e){
-        e.preventDefault();
-        console.log('Enter');
-        this.classList.add('puzzles--hovered')
-        // console.log(this);
-        // this.elements.puzzlesContainer.classList.add('puzzles--hovered')
-    },
-
-    _dragLeave(){
-        console.log('Leave');
-        this.classList.remove('puzzles--hovered')
-    },
-
-    _dragDrop(){
-        console.log('drop');
-        this.classList.remove('puzzles--hovered')
+        coordinates.push(y)
+        coordinates.push(x)
+        return coordinates
     },
 }
 
