@@ -1,4 +1,6 @@
 
+
+
 const gemPuzzle = {
 
     elements: {
@@ -8,7 +10,7 @@ const gemPuzzle = {
         puzzlesContainer: null,
         puzzles: null,
         time: null,
-        moves: 0,
+        moves: null,
         congratulations: null,
         menu: null,
         menuButtons: ['Scores', 'New game', `Field type`, 'Sound', 'Pause', 'Change Image'],
@@ -27,9 +29,14 @@ const gemPuzzle = {
 
         paused: false,
         soundOn: true,
-        completed: false,
+        isCompleted: false,
         scoreShown: false,
         scores: [],
+        timer: null,
+        seconds: 1,
+        minutes: 0,
+        hours: 0,
+        moves: 0,
     },
 
     layoutTypes: [
@@ -61,7 +68,7 @@ const gemPuzzle = {
 
         this.elements.time = document.createElement('time')
         this.elements.time.classList.add('info-content__time')
-        this.elements.time.innerText = 'Time 00:02'
+        this.elements.time.innerText = '00:00:00'
 
         this.elements.moves = document.createElement('div')
         this.elements.moves.classList.add('info-content__moves')
@@ -139,11 +146,14 @@ const gemPuzzle = {
 
         const messageContent = document.createElement('div')
         messageContent.classList.add('message__content')
-        messageContent.innerText = 'Congratulations! You solved it for 01:01 and 10 moves'
 
         this.elements.main.appendChild(message)
         message.appendChild(messageWrapper)
         messageWrapper.appendChild(messageContent)
+
+        clearInterval(this.properties.timer)
+        this.properties.timer = setInterval(this._showTime, 1000);
+
     },
 
     _createPuzzles() {
@@ -170,12 +180,10 @@ const gemPuzzle = {
                 break;
         }
 
-        // ВОТ ТУТ МЕНЯЕМ ВСЕ С ГРИДА НА ПОЗИШН АБСОЛЮТ                      МЕНЯЕМ
-
         this.properties.rowLength = Math.sqrt(this.properties.puzzlesNumber)
 
         const numbers = [...Array(this.properties.puzzlesNumber).keys()]
-            .sort(() => Math.random() - 0.5)
+            // .sort(() => Math.random() - 0.5)
 
         this.elements.cells = []
 
@@ -229,6 +237,7 @@ const gemPuzzle = {
             }
             fragment.appendChild(puzzleElement)
         }
+
 
         return fragment
     },
@@ -289,7 +298,7 @@ const gemPuzzle = {
                     break;
                 case 'Change Image':
                     buttonElement.setAttribute('id', 'change-image')
-                    buttonElement.innerHTML = createIconHtml('loop')
+                    buttonElement.innerText = 'Change image'
                     buttonElement.addEventListener('click', (e) => {
                         this._changeImage()
                         this._pressNewGame()
@@ -306,15 +315,15 @@ const gemPuzzle = {
 
     },
 
-    _startNewGame() {
-
-    },
-
     _startSavedGame() {
+
 
     },
 
     _shiftPuzzle(e, left, top, index) {
+        if (gemPuzzle.properties.isCompleted) {
+            return
+        }
         const cell = this.elements.cells[index]
 
 
@@ -337,15 +346,20 @@ const gemPuzzle = {
         cell.left = emptyLeft
         cell.top = emptyTop
 
+        this._showMoves()
+
+
         const isFinished = this.elements.cells.every(cell => {
-            return cell.value === cell.top * 4 + cell.left
+            return cell.value === cell.top * this.properties.rowLength + cell.left
         })
 
         function greetWinner() {
-            alert('Congratulations! You won!')
+            // alert(`Congratulations! You solved the puzzle in ${document.querySelector('.info-content__time').innerHTML} and ${gemPuzzle.properties.moves} moves`)
+            document.querySelector('.message__content').innerText = `Congratulations! You solved the puzzle in ${document.querySelector('.info-content__time').innerHTML} and ${gemPuzzle.properties.moves} moves`
         }
 
         if (isFinished) {
+            gemPuzzle.properties.isCompleted = true
             setTimeout(greetWinner, 600)
         }
 
@@ -356,11 +370,41 @@ const gemPuzzle = {
     },
 
     _showTime() {
+        if (gemPuzzle.properties.isCompleted) {
+            return
+        }
+
+        if (gemPuzzle.properties.seconds === 60) {
+            gemPuzzle.properties.seconds = 0
+            gemPuzzle.properties.minutes += 1
+        }
+        if (gemPuzzle.properties.minutes === 60) {
+            gemPuzzle.properties.minutes = 0
+            gemPuzzle.properties.hours += 1
+        }
+
+        const time = document.querySelector('.info-content__time');
+
+        time.innerText = addZero(gemPuzzle.properties.hours) +
+            ':' +
+            addZero(gemPuzzle.properties.minutes) +
+            ':' +
+            addZero(gemPuzzle.properties.seconds)
+
+        gemPuzzle.properties.seconds += 1
+
+        function addZero(n) {
+            return Number(n) < 10 ? "0" + n : n;
+        }
 
     },
 
     _showMoves() {
-
+        this.properties.moves += 1
+        // if (gemPuzzle.properties.isCompleted) {
+        //     return
+        // }
+        this.elements.moves.innerText = `Moves: ${this.properties.moves}`
     },
 
     _toggleScore() {
@@ -368,11 +412,30 @@ const gemPuzzle = {
     },
 
     _pressNewGame() {
+        this.properties.isCompleted = false
         this.elements.puzzlesContainer.innerHTML = ''
         this.elements.puzzlesContainer.appendChild(this._createPuzzles())
+        document.querySelector('.message__content').innerText = ` `
+
+
+        // Новый таймер
+        this.properties.hours = 0
+        this.properties.minutes = 0
+        this.properties.seconds = 1
+        document.querySelector('.info-content__time').innerHTML = '00:00:00'
+        clearInterval(this.properties.timer)
+        this.properties.timer = setInterval(this._showTime, 1000);
+
+        // Новый счетчик ходов
+        this.properties.moves = 0
+        this.elements.moves.innerText = `Moves: ${this.properties.moves}`
+
     },
 
     _changeLayOut(e) {
+        this.properties.isCompleted = false
+        document.querySelector('.message__content').innerText = ` `
+
         //Change the button
         let layoutIndex = this.layoutTypes.indexOf(this.properties.layout)
         if (layoutIndex === this.layoutTypes.length - 1) {
@@ -392,6 +455,10 @@ const gemPuzzle = {
     },
 
     _changeImage() {
+        this.properties.isCompleted = false
+        document.querySelector('.message__content').innerText = ` `
+
+
 
     },
 
@@ -412,13 +479,15 @@ const gemPuzzle = {
     },
 
     _dragStart(e) {
-        console.log(e.target);
+
         setTimeout(() => {
             e.target.classList.add('puzzles__item--hide')
         }, 0)
     },
 
-    _dragEnd(e, left, top, index){
+    _dragEnd(e, left, top, index) {
+
+
         e.target.classList.remove('puzzles__item--hide')
 
         const cell = this.elements.cells[index]
@@ -430,6 +499,10 @@ const gemPuzzle = {
         if (leftDiff + topDiff > 1) {
             return
         }
+        if (gemPuzzle.properties.isCompleted) {
+            return
+        }
+
 
         cell.element.style = `top: ${this.elements.empty.top * this.properties.cellSize}%;
                           left: ${this.elements.empty.left * this.properties.cellSize}%;
@@ -443,40 +516,40 @@ const gemPuzzle = {
         cell.left = emptyLeft
         cell.top = emptyTop
 
+        this._showMoves()
+
         const isFinished = this.elements.cells.every(cell => {
-            return cell.value === cell.top * 4 + cell.left
+            return cell.value === cell.top * this.properties.rowLength + cell.left
         })
 
         function greetWinner() {
-            alert('Congratulations! You won!')
+            // alert(`Congratulations! You solved the puzzle in ${document.querySelector('.info-content__time').innerHTML} and ${gemPuzzle.properties.moves} moves`)
+            document.querySelector('.message__content').innerText = `Congratulations! You solved the puzzle in ${document.querySelector('.info-content__time').innerHTML} and ${gemPuzzle.properties.moves} moves`
         }
 
         if (isFinished) {
+            gemPuzzle.properties.isCompleted = true
             setTimeout(greetWinner, 600)
         }
 
     },
 
-    _dragOver(e){
+    _dragOver(e) {
         e.preventDefault();
-
-        // console.log('over');
-
     },
-    _dragEnter(e){
+
+    _dragEnter(e) {
         e.preventDefault();
         console.log('Enter');
         this.classList.add('puzzles--hovered')
-        // console.log(this);
-        // this.elements.puzzlesContainer.classList.add('puzzles--hovered')
     },
 
-    _dragLeave(){
+    _dragLeave() {
         console.log('Leave');
         this.classList.remove('puzzles--hovered')
     },
 
-    _dragDrop(){
+    _dragDrop() {
         console.log('drop');
         this.classList.remove('puzzles--hovered')
     },
@@ -485,3 +558,4 @@ const gemPuzzle = {
 window.addEventListener('DOMContentLoaded', () => {
     gemPuzzle.init()
 })
+
