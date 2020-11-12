@@ -17,6 +17,7 @@ const gemPuzzle = {
         scoresInfo: null,
         empty: null,
         cells: [],
+        soundsContainer: null,
     },
 
     properties: {
@@ -49,6 +50,8 @@ const gemPuzzle = {
     ],
 
     imagesPath: "src/images",
+
+    sounds: [`tink.wav`, 'default-sound-2.mp3'],
 
     init() {
 
@@ -154,6 +157,14 @@ const gemPuzzle = {
         clearInterval(this.properties.timer)
         this.properties.timer = setInterval(this._showTime, 1000);
 
+        // Create block Sounds
+        this.elements.soundsContainer = document.createElement('div')
+        this.elements.soundsContainer.classList.add('sounds')
+        this.elements.soundsContainer.appendChild(this._createSounds())
+        document.body.appendChild(this.elements.soundsContainer)
+
+
+
     },
 
     _createPuzzles() {
@@ -183,7 +194,7 @@ const gemPuzzle = {
         this.properties.rowLength = Math.sqrt(this.properties.puzzlesNumber)
 
         const numbers = [...Array(this.properties.puzzlesNumber).keys()]
-            // .sort(() => Math.random() - 0.5)
+            .sort(() => Math.random() - 0.5)
 
         this.elements.cells = []
 
@@ -232,7 +243,6 @@ const gemPuzzle = {
                 })
                 puzzleElement.addEventListener('click', (e) => {
                     this._shiftPuzzle(e, left, top, i)
-                    this._playSound()
                 })
             }
             fragment.appendChild(puzzleElement)
@@ -260,7 +270,7 @@ const gemPuzzle = {
                     buttonElement.innerText = 'Scores'
                     buttonElement.addEventListener('click', (e) => {
                         this._toggleScore()
-                        this._playSound()
+                        this._playSound('button')
                     })
                     break;
                 case 'New game':
@@ -268,7 +278,7 @@ const gemPuzzle = {
                     buttonElement.innerText = 'New game'
                     buttonElement.addEventListener('click', (e) => {
                         this._pressNewGame()
-                        this._playSound()
+                        this._playSound('button')
                     })
                     break;
                 case 'Field type':
@@ -277,15 +287,15 @@ const gemPuzzle = {
                     buttonElement.addEventListener('click', (e) => {
                         this._changeLayOut(e)
                         this._pressNewGame()
-                        this._playSound()
+                        this._playSound('button')
                     })
                     break;
                 case 'Sound':
                     buttonElement.setAttribute('id', 'sound')
-                    buttonElement.innerHTML = createIconHtml('volume_off')
+                    buttonElement.innerHTML = createIconHtml('volume_up')
                     buttonElement.addEventListener('click', (e) => {
-                        this._toggleSound()
-                        this._playSound()
+                        this._toggleSound(e)
+                        this._playSound('button')
                     })
                     break;
                 case 'Pause':
@@ -293,7 +303,7 @@ const gemPuzzle = {
                     buttonElement.innerHTML = createIconHtml('pause')
                     buttonElement.addEventListener('click', (e) => {
                         this._togglePause()
-                        this._playSound()
+                        this._playSound('button')
                     })
                     break;
                 case 'Change Image':
@@ -302,7 +312,7 @@ const gemPuzzle = {
                     buttonElement.addEventListener('click', (e) => {
                         this._changeImage()
                         this._pressNewGame()
-                        this._playSound()
+                        this._playSound('button')
                     })
                     break;
             }
@@ -347,6 +357,7 @@ const gemPuzzle = {
         cell.top = emptyTop
 
         this._showMoves()
+        this._playSound('puzzle')
 
 
         const isFinished = this.elements.cells.every(cell => {
@@ -462,11 +473,41 @@ const gemPuzzle = {
 
     },
 
-    _toggleSound() {
+    _toggleSound(e) {
+        this.properties.soundOn = !this.properties.soundOn
+
+        let buttonStatus = e.target.textContent
+        console.log(e.target);
+        console.log(e.currentTarget);
+
+        switch (buttonStatus) {
+            case 'volume_off':
+                e.currentTarget.innerHTML = `<i class="material-icons">volume_up</i>`
+                break;
+            default: // 'volume_up'
+                e.currentTarget.innerHTML = `<i class="material-icons">volume_off</i>`
+                break;
+        }
 
     },
 
-    _playSound() {
+    _playSound(input) {
+        if (this.properties.soundOn === false) {
+            return
+        }
+
+        switch (input) {
+            case 'puzzle':
+                let audioPuzzle = document.querySelector('.sound-0')
+                audioPuzzle.currentTime = 0
+                audioPuzzle.play()
+                break;
+            default: // case 'button':
+                let audioButton = document.querySelector('.sound-1')
+                audioButton.currentTime = 0
+                audioButton.play()
+                break;
+        }
 
     },
 
@@ -516,6 +557,7 @@ const gemPuzzle = {
         cell.left = emptyLeft
         cell.top = emptyTop
 
+        this._playSound('puzzle')
         this._showMoves()
 
         const isFinished = this.elements.cells.every(cell => {
@@ -553,6 +595,20 @@ const gemPuzzle = {
         console.log('drop');
         this.classList.remove('puzzles--hovered')
     },
+
+    _createSounds() {
+        const fragment = document.createDocumentFragment();
+
+        for (let i = 0; i < this.sounds.length; i += 1) {
+            let sound = document.createElement('audio')
+            sound.classList.add(`sound-${i}`)
+            sound.setAttribute('src', `src/sounds/${this.sounds[i]}`)
+            fragment.appendChild(sound)
+        }
+
+        return fragment
+    },
+
 }
 
 window.addEventListener('DOMContentLoaded', () => {
