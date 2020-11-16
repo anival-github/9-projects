@@ -29,10 +29,9 @@
      }
 
     &__item--filled {
-        background-color: $color-primary;
 
         &:hover {
-            background-color: $color-additional;
+            opacity: 0.5;
             @extend %transition;
         }
     }

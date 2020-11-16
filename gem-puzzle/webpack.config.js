@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: './src/js/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -11,8 +12,8 @@ module.exports = {
       {
         test: /\.(js)$/,
         exclude: /node_modules/,
-        use: ["eslint-loader"]
-      }
-    ]
+        use: ['eslint-loader'],
+      },
+    ],
   },
 };

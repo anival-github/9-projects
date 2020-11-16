@@ -21,6 +21,7 @@ const gemPuzzle = {
     cells: [],
     soundsContainer: null,
     messageContent: null,
+    canvas: null,
   },
 
   properties: {
@@ -53,6 +54,12 @@ const gemPuzzle = {
     // Create main elements, classes and DOM structure
     this.elements.main = document.createElement('main');
     this.elements.main.classList.add('puzzle-game');
+
+    // Create block Canvas
+    this.elements.canvas = document.createElement('canvas');
+    this.elements.canvas.setAttribute('id', 'canvas');
+    this.elements.canvas.innerText = 'Canvas not supproted';
+    this.elements.main.appendChild(this.elements.canvas);
 
     // Create block Info
     this.elements.info = document.createElement('section');
@@ -111,17 +118,13 @@ const gemPuzzle = {
 
     // Вставить новую функцию на случай перезагрузки приложения
 
-    // localStorage.getItem('cells') === null ?
-    this.elements.puzzlesContainer
-      .appendChild(this.createPuzzles()); // ФУНКЦИЯ ПО ДОБАВЛЕНИЮ ПАЗЛОВ
-    // this.elements.puzzlesContainer.appendChild(this._downloadPuzzles());
-    // Загрузка сохранения
+    // this.elements.puzzlesContainer.appendChild(this.createPuzzles());
 
-    // this.elements.puzzlesContainer.appendChild(
-    //     localStorage.getItem('cells') === null ?
-    //     this._createPuzzles() :
-    //     this._downloadPuzzles()
-    // )
+    this.elements.puzzlesContainer.appendChild(
+      localStorage.getItem('cells') === null
+        ? this.createPuzzles() // For the first start
+        : this.downloadPuzzles(), // For the page reload
+    );
 
     this.elements.puzzlesContainer.addEventListener('dragover', this.dragOver);
     this.elements.puzzlesContainer.addEventListener('dragenter', this.dragEnter);
@@ -190,7 +193,58 @@ const gemPuzzle = {
   },
 
   downloadPuzzles() {
-    // console.log(JSON.parse(localStorage.getItem('cells')));
+    const fragment = document.createDocumentFragment();
+
+    this.properties.layout = localStorage.getItem('layout');
+    this.properties.puzzlesNumber = localStorage.getItem('puzzlesCount');
+    this.properties.rowLength = Math.sqrt(this.properties.puzzlesNumber);
+    this.elements.cells = JSON.parse(localStorage.getItem('cells'));
+    this.elements.empty = JSON.parse(localStorage.getItem('empty'));
+
+    // Rebuild saved puzzle set
+
+    for (let i = 0; i < this.elements.cells.length; i += 1) {
+      const puzzleElement = document.createElement('div');
+      this.properties.cellSize = 100 / this.properties.rowLength;
+
+      const { left } = this.elements.cells[i];
+      const { top } = this.elements.cells[i];
+      const { value } = this.elements.cells[i];
+      const { image } = this.elements.cells[i];
+
+      if (value !== 0) {
+        puzzleElement.classList.add('puzzles__item', 'puzzles__item--filled');
+        puzzleElement.setAttribute('draggable', 'true');
+        // puzzleElement.innerText = value;
+
+        puzzleElement.style = `
+          top: ${top * this.properties.cellSize}%;
+          left: ${left * this.properties.cellSize}%;
+          width: ${this.properties.cellSize}%;
+          height: ${this.properties.cellSize}%;`;
+
+        this.elements.cells[i].element = puzzleElement;
+
+        const img = document.createElement('img');
+        img.setAttribute('src', image);
+        img.style = 'width: 100%; height: 100%;';
+        puzzleElement.appendChild(img);
+
+        puzzleElement.addEventListener('dragstart', (e) => {
+          this.dragStart(e);
+        });
+        puzzleElement.addEventListener('dragend', (e) => {
+          this.dragEnd(e, left, top, i);
+        });
+        puzzleElement.addEventListener('click', (e) => {
+          this.shiftPuzzle(e, left, top, i);
+        });
+      }
+
+      fragment.appendChild(puzzleElement);
+    }
+
+    return fragment;
   },
 
   createPuzzles() {
@@ -223,6 +277,8 @@ const gemPuzzle = {
 
     this.properties.rowLength = Math.sqrt(this.properties.puzzlesNumber);
 
+    const imgNumber = Math.floor(1 + Math.random() * (150 + 1 - 1));
+
     const numbers = [...Array(this.properties.puzzlesNumber).keys()].sort(
       () => Math.random() - 0.5,
     );
@@ -247,15 +303,20 @@ const gemPuzzle = {
         puzzleElement.classList.add('puzzles__item', 'puzzles__item--filled');
         puzzleElement.setAttribute('draggable', 'true');
         const value = numbers[i];
-        puzzleElement.innerText = value;
+        // puzzleElement.innerText = value;
+        puzzleElement.setAttribute('id', value);
 
         const left = i % this.properties.rowLength;
         const top = (i - left) / this.properties.rowLength;
 
-        puzzleElement.style = `top: ${top * this.properties.cellSize}%;
-                     left: ${left * this.properties.cellSize}%;
-                     width: ${this.properties.cellSize}%;
-                     height: ${this.properties.cellSize}%;`;
+        this
+          .createImageSet(i, this.properties.cellSize, imgNumber, puzzleElement, value);
+
+        puzzleElement.style = `
+          top: ${top * this.properties.cellSize}%;
+          left: ${left * this.properties.cellSize}%;
+          width: ${this.properties.cellSize}%;
+          height: ${this.properties.cellSize}%;`;
 
         this.elements.cells.push({
           value,
@@ -279,6 +340,44 @@ const gemPuzzle = {
     }
 
     return fragment;
+  },
+
+  createImageSet(index, cellSize, imgNumber, puzzleElement, value) {
+    const cellSizePx = 900 * (cellSize / 100);
+
+    const left = value % this.properties.rowLength;
+    const top = (value - left) / this.properties.rowLength;
+    const leftPx = left * cellSizePx;
+    const topPx = top * cellSizePx;
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.style = `width: ${cellSizePx}px; height: ${cellSizePx}px; display: none`;
+
+    const im = new Image(cellSizePx, cellSizePx);
+    im.src = `/src/images/${imgNumber}.jpg`;
+
+    im.onload = () => {
+      canvas.width = im.naturalWidth;
+      canvas.height = im.naturalHeight;
+      ctx.drawImage(
+        im,
+        leftPx,
+        topPx,
+        cellSizePx,
+        cellSizePx,
+        0,
+        0,
+        100 * 9,
+        100 * 9,
+      );
+      const imageURL = canvas.toDataURL('image/jpeg').replace('image/png', 'image/octet-stream');
+      const img = document.createElement('img');
+      img.setAttribute('src', imageURL);
+      img.style = 'width: 100%; height: 100%;';
+      puzzleElement.appendChild(img);
+      this.elements.cells[index].image = imageURL;
+    };
   },
 
   createButtons() {
@@ -354,6 +453,7 @@ const gemPuzzle = {
   startSavedGame() {},
 
   shiftPuzzle(e, left, top, index) {
+    this.properties.paused = false;
     const cell = this.elements.cells[index];
 
     const leftDiff = Math.abs(this.elements.empty.left - cell.left);
@@ -370,7 +470,9 @@ const gemPuzzle = {
       top: ${this.elements.empty.top * this.properties.cellSize}%;
       left: ${this.elements.empty.left * this.properties.cellSize}%;
       width: ${this.properties.cellSize}%;
-      height: ${this.properties.cellSize}%`;
+      height: ${this.properties.cellSize}%;
+      background: url(${cell.image}) 0 0/100% auto no-repeat;
+      `;
 
     const emptyLeft = this.elements.empty.left;
     const emptyTop = this.elements.empty.top;
@@ -399,10 +501,18 @@ const gemPuzzle = {
   },
 
   showTime() {
-    gemPuzzle.setItemLocalStorage();
-
     if (gemPuzzle.properties.isCompleted) {
       return;
+    }
+
+    if (localStorage.getItem('seconds') !== null) {
+      gemPuzzle.properties.seconds = Number(localStorage.getItem('seconds'));
+    }
+    if (localStorage.getItem('minutes') !== null) {
+      gemPuzzle.properties.minutes = Number(localStorage.getItem('minutes'));
+    }
+    if (localStorage.getItem('hours') !== null) {
+      gemPuzzle.properties.hours = Number(localStorage.getItem('hours'));
     }
 
     if (gemPuzzle.properties.seconds === 60) {
@@ -421,6 +531,10 @@ const gemPuzzle = {
 
     time.innerText = `${hours}:${minutes}:${seconds}`;
     gemPuzzle.properties.seconds += 1;
+
+    localStorage.setItem('hours', gemPuzzle.properties.hours);
+    localStorage.setItem('minutes', gemPuzzle.properties.minutes);
+    localStorage.setItem('seconds', gemPuzzle.properties.seconds);
   },
 
   addZero(n) {
@@ -428,13 +542,12 @@ const gemPuzzle = {
   },
 
   setItemLocalStorage() {
-    // localStorage.clear()
-    localStorage.setItem('hours', this.properties.hours);
-    localStorage.setItem('minutes', this.properties.minutes);
-    localStorage.setItem('seconds', this.properties.seconds);
-    localStorage.setItem('moves', this.properties.moves);
+    // console.log(this.elements.cells);
+
     localStorage.setItem('layout', this.properties.layout);
+    localStorage.setItem('puzzlesCount', this.properties.puzzlesNumber);
     localStorage.setItem('cells', JSON.stringify(this.elements.cells));
+    localStorage.setItem('empty', JSON.stringify(this.elements.empty));
     localStorage.setItem('soundOn', JSON.stringify(this.properties.soundOn));
     localStorage.setItem('isCompleted', JSON.stringify(this.properties.isCompleted));
     localStorage.setItem('paused', JSON.stringify(this.properties.paused));
@@ -442,9 +555,13 @@ const gemPuzzle = {
   },
 
   showMoves() {
+    if (localStorage.getItem('moves') !== null) {
+      this.properties.moves = Number(localStorage.getItem('moves'));
+    }
+
     this.properties.moves += 1;
     this.elements.moves.innerText = `Moves: ${this.properties.moves}`;
-    this.setItemLocalStorage();
+    localStorage.setItem('moves', this.properties.moves);
   },
 
   toggleScore() {},
@@ -458,7 +575,7 @@ const gemPuzzle = {
     this.elements.puzzlesContainer.appendChild(this.createPuzzles());
     document.querySelector('.message__content').innerText = ' ';
 
-    // Новый таймер
+    // New timer
     this.properties.hours = 0;
     this.properties.minutes = 0;
     this.properties.seconds = 1;
@@ -466,9 +583,26 @@ const gemPuzzle = {
     clearInterval(this.properties.timer);
     this.properties.timer = setInterval(this.showTime, 1000);
 
-    // Новый счетчик ходов
+    // New moves counter
     this.properties.moves = 0;
     this.elements.moves.innerText = `Moves: ${this.properties.moves}`;
+
+    this.clearLocalStorage();
+  },
+
+  clearLocalStorage() {
+    // Only soundOn remains in local storage
+    localStorage.removeItem('moves');
+    localStorage.removeItem('hours');
+    localStorage.removeItem('minutes');
+    localStorage.removeItem('seconds');
+    localStorage.removeItem('layout');
+    localStorage.removeItem('puzzlesCount');
+    localStorage.removeItem('cells');
+    localStorage.removeItem('empty');
+    localStorage.removeItem('isCompleted');
+    localStorage.removeItem('paused');
+    localStorage.removeItem('message');
   },
 
   changeLayOut(e) {
@@ -536,7 +670,9 @@ const gemPuzzle = {
     }
   },
 
-  togglePause() {},
+  togglePause() {
+    this.properties.paused = !this.properties.paused;
+  },
 
   showCongrats() {
     const message = document.querySelector('.message__content');

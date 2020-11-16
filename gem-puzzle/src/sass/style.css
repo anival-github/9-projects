@@ -19,6 +19,13 @@ button {
   cursor: pointer;
 }
 
+canvas {
+  border: 5px solid black;
+  width: 900px;
+  height: 900px;
+  display: none;
+}
+
 .wrapper {
   max-width: 600px;
   margin: auto;
@@ -27,6 +34,11 @@ button {
 .puzzles__item--filled:hover {
   -webkit-transition: all .5s ease-out;
   transition: all .5s ease-out;
+}
+
+.info {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .info-content {
@@ -43,6 +55,10 @@ button {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
+}
+
+.message {
+  margin-top: 20px;
 }
 
 .puzzle-game {
@@ -63,6 +79,41 @@ button {
   .header {
     padding: 0 10px;
   }
+}
+
+.navigation {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.navigation__button {
+  width: 15%;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.scores-info {
+  margin-top: 20px;
 }
 
 .puzzles {
@@ -100,12 +151,8 @@ button {
   transition: all .3s;
 }
 
-.puzzles__item--filled {
-  background-color: #fdbfbf;
-}
-
 .puzzles__item--filled:hover {
-  background-color: #ff2929ab;
+  opacity: 0.5;
 }
 
 .puzzles__item--empty {
