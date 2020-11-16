@@ -355,7 +355,7 @@ const gemPuzzle = {
     canvas.style = `width: ${cellSizePx}px; height: ${cellSizePx}px; display: none`;
 
     const im = new Image(cellSizePx, cellSizePx);
-    im.src = `/src/images/${imgNumber}.jpg`;
+    im.src = `../src/images/${imgNumber}.jpg`;
 
     im.onload = () => {
       canvas.width = im.naturalWidth;
