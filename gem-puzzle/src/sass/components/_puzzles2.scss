@@ -1,0 +1,43 @@
+
+.puzzles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+    "p0 p1 p2"
+    "p3 p4 p5"
+    "p6 p7 p8";
+    max-height: $content-width;
+    height: calc(100vw);
+    transition: all 3s;
+
+    &__item {
+        border: 1px solid black;
+        cursor: pointer;
+        font-size: 3rem;
+        color: $color-puzzles;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 3s;
+     }
+
+    &__item--filled {
+        background-color: $color-primary;
+
+        &:hover {
+            background-color: $color-additional;
+            @extend %transition;
+        }
+    }
+
+    &__item--empty {
+        background: none;
+    }
+
+    &__item--active {
+    }
+
+    &__item--inactive {
+    }
+
+}

@@ -1,0 +1,46 @@
+
+.puzzles {
+    position: relative;
+    display: inline-block;
+    border: 1px solid black;
+    width: 100%;
+    max-height: $content-width;
+    height: calc(100vw);
+    transition: all .3s;
+
+    &--hovered{
+        background-color: #d1d8e2;
+    }
+
+
+    &__item {
+        width: calc(100% / 4);
+        height: calc(100% / 4);
+
+
+        position: absolute;
+        border: 1px solid black;
+        cursor: pointer;
+        font-size: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all .3s;
+     }
+
+    &__item--filled {
+
+        &:hover {
+            opacity: 0.5;
+            @extend %transition;
+        }
+    }
+
+    &__item--empty {
+        background: none;
+    }
+
+    &__item--hide {
+        display: none;
+    }
+}
