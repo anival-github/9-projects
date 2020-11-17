@@ -542,8 +542,6 @@ const gemPuzzle = {
   },
 
   setItemLocalStorage() {
-    // console.log(this.elements.cells);
-
     localStorage.setItem('layout', this.properties.layout);
     localStorage.setItem('puzzlesCount', this.properties.puzzlesNumber);
     localStorage.setItem('cells', JSON.stringify(this.elements.cells));
