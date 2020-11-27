@@ -37,8 +37,8 @@ canvas {
 }
 
 .info {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .info-content {
@@ -82,7 +82,7 @@ canvas {
 }
 
 .navigation {
-  margin-top: 20px;
+  margin-top: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -135,7 +135,6 @@ canvas {
   width: calc(100% / 4);
   height: calc(100% / 4);
   position: absolute;
-  border: 1px solid black;
   cursor: pointer;
   font-size: 3rem;
   display: -webkit-box;
