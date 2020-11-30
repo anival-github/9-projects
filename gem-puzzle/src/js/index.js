@@ -361,12 +361,14 @@ const gemPuzzle = {
       fragment.appendChild(puzzleElement);
     }
 
-    // this.mixPuzzles();
+    console.log(this.layouts.properties.puzzlesCount);
+    this.mixPuzzles();
 
     return fragment;
   },
 
   mixPuzzles() {
+    console.log(this.layouts.properties.puzzlesCount);
     for (let i = 0; i <= this.layouts.properties.puzzlesCount; i += 1) {
       const emptyValue = this.properties.empty.value;
       const rowLength = this.layouts.properties.puzzlesInRow;
