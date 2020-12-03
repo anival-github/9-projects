@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
@@ -63,6 +64,7 @@ module.exports = {
   },
   devtool: isDev ? 'source-map' : 'nosources-source-map',
   plugins: [
+    new ESLintPlugin(),
     new HTMLWebpackPlugin({
       template: './index.html',
     }),
@@ -86,14 +88,14 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'eslint-loader',
-          },
-          {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
             },
           },
+          // {
+          //   loader: 'eslint-loader',
+          // },
         ],
       },
       {
