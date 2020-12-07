@@ -1,0 +1,15 @@
+.header {
+	background-color: var(--primary-color);
+	color: white;
+	height: 10vh;
+	display: flex;
+
+	.wrapper {
+		height: 60px;
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+}

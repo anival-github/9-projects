@@ -1,207 +1,27 @@
+@import "abstract/constants";
+@import "abstract/keyframes";
+
+@import "base/base";
+
+@import "components/card";
+@import "components/menu__content";
+@import "components/burger";
+@import "components/cards-container";
+@import "components/switch-buttons";
+@import "components/game-status";
+
+@import "layout/footer";
+@import "layout/header";
+@import "layout/wrapper";
+@import "layout/content";
+
 @import "roboto.scss";
 @import "~normalize.css";
 
 :root {
-	--primary-color: rgba(13, 110, 139, 0.45);
-	--overlay-color: rgba(151, 196, 233, 0.85);
+	--primary-color: rgba(99, 114, 119, 0.45);
+	--primary-color-dark: rgba(99, 114, 119, 0.65);
+	--overlay-color: rgba(79, 104, 124, 0.95);
+	--overlay-color-white: rgba(255, 255, 255, 0.15);
 	--menu-speed: 0.75s;
-}
-
-* {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-}
-
-body {
-	font-family: 'Roboto', sans-serif;
-	line-height: 1.4;
-
-	&:before {
-		content: '';
-		background: url(../assets/images/background-image.jpg) no-repeat center center/cover;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: -1;
-	}
-}
-
-.wrapper {
-	max-width: 1280px;
-	width: 100%;
-	margin: auto;
-	overflow: hidden;
-	padding: 0 3rem;
-}
-
-.header {
-	background-color: var(--primary-color);
-	color: white;
-	height: 10vh;
-	display: flex;
-	// flex-direction: row;
-	// align-items: center;
-	// justify-content: center;
-
-	.wrapper {
-		height: 60px;
-		position: relative;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-	}
-}
-
-.footer {
-	background-color: var(--primary-color);
-	color: white;
-	height: 10vh;
-
-	.wrapper {
-		height: 100%;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-		align-items: center;
-		font-size: 1.5rem;
-		text-shadow: 1px 1px 2px black;
-
-		A {
-			color: inherit;
-			text-decoration: none;
-			transition: color 0.4s ease;
-		}
-	}
-}
-
-.content {
-	background-color: var(--primary-color);
-	color: white;
-	height: 80vh;
-	position: relative;
-}
-
-
-
-.burger-button {
-	background-color: black;
-	position: relative;
-	color: white;
-	text-align: center;
-	height: 40px;
-
-	&__label {
-		display: block;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		cursor: pointer;
-		z-index: 2;
-	}
-}
-
-.burger-line {
-	position: absolute;
-	top: 8px;
-	right: 10px;
-	width: 35px;
-	height: 2px;
-	background-color: white;
-
-	&--second, &--third {
-		top: 18px;
-	}
-
-	&--fourth {
-		top: 28px;
-	}
-}
-
-.main-menu{
-	display: block;
-	position: absolute;
-	width: 100%;
-	bottom: 0;
-	left: 0;
-	transform: translateY(100%);
-}
-
-#check-menu {
-	display: none;
-}
-
-
-
-
-
-.tgl {
-	display: none;
-
-	&,
-  &:after,
-  &:before,
-	& *,
-  & *:after,
-  & *:before,
-	& + .tgl-btn {
-		box-sizing: border-box;
-		&::selection {
-			background: none;
-		}
-	}
-
-	+ .tgl-btn {
-		outline: 0;
-		display: block;
-		width: 4em;
-		height: 2em;
-		position: relative;
-		cursor: pointer;
-    user-select: none;
-		&:after,
-    &:before {
-			position: relative;
-			display: block;
-			content: "";
-			width: 50%;
-			height: 100%;
-		}
-
-		&:after {
-			left: 0;
-		}
-
-		&:before {
-			display: none;
-		}
-	}
-
-	&:checked + .tgl-btn:after {
-		left: 50%;
-	}
-}
-
-// themes
-.tgl-light {
-	+ .tgl-btn {
-		background: #f0f0f0;
-		border-radius: 2em;
-		padding: 2px;
-		transition: all .4s ease;
-		&:after {
-			border-radius: 50%;
-			background: #fff;
-			transition: all .2s ease;
-		}
-	}
-
-	&:checked + .tgl-btn {
-		background: #9FD6AE;
-	}
 }
