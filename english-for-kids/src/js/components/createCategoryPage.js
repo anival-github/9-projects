@@ -22,7 +22,7 @@ export default function createCategoryPage(cardsData) {
 
     const cardElement = createElement('div', 'card card_descriptioned', null, categoriesContainer);
     const cardPictureElement = createElement('div', 'card__picture card__picture_small', null, cardElement);
-    cardPictureElement.style = `background-image: url(../../data/${cardSet[1].image});`;
+    cardPictureElement.style = `background-image: url(./data/${cardSet[1].image});`;
     const cardContentElement = createElement('div', 'card__content', null, cardElement);
     createElement('div', 'card__title', cardCategory, cardContentElement);
     createElement('div', 'card__insides', `${cardSet.length} cards`, cardContentElement);

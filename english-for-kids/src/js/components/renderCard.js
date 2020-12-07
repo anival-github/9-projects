@@ -7,7 +7,7 @@ function renderFrontSide(cardElement, data) {
   const frontSide = createElement('div', 'card__side is-active', null, cardWrapper);
 
   const picture = createElement('div', 'card__picture card__picture_small', null, frontSide);
-  picture.style = `background-image: url(../../data/${data.image});`;
+  picture.style = `background-image: url(./data/${data.image});`;
 
   const contentWrapper = createElement('div', 'card__content', null, frontSide);
   createElement('div', 'card__title card__title_eng', data.word, contentWrapper);
@@ -34,7 +34,7 @@ function renderBackSide(cardElement, data) {
   const backSide = createElement('div', 'card__side card__side--back', null, cardWrapper);
 
   const picture = createElement('div', 'card__picture card__picture_small', null, backSide);
-  picture.style = `background-image: url(../../data/${data.image});`;
+  picture.style = `background-image: url(./data/${data.image});`;
 
   const contentWrapper = createElement('div', 'card__content', null, backSide);
   createElement('div', 'card__title card__title_rus', data.translation, contentWrapper);
@@ -58,7 +58,7 @@ export default function renderCard(container, data) {
   });
 
   const soundElement = createElement('audio', 'card__audio', null, cardElement);
-  soundElement.setAttribute('src', `../../data/${data.audioSrc}`);
+  soundElement.setAttribute('src', `./data/${data.audioSrc}`);
 
   cardElement.addEventListener('click', () => {
     const isRegimeTrain = document.querySelector('.regime-toggler').checked;

@@ -4,10 +4,10 @@ import createElement from '../utils/createElement';
 const bodyElement = document.querySelector('body');
 
 const soundCorrectElement = createElement('audio', 'audio_correct', null, bodyElement);
-soundCorrectElement.setAttribute('src', '../../assets/audioComments/correct.mp3');
+soundCorrectElement.setAttribute('src', './assets/audioComments/correct.mp3');
 
 const soundErrorElement = createElement('audio', 'audio_error', null, bodyElement);
-soundErrorElement.setAttribute('src', '../../assets/audioComments/error.mp3');
+soundErrorElement.setAttribute('src', './assets/audioComments/error.mp3');
 
 function startGame(audioSetMixed, audioElementIndex, cardElements) {
   console.log(cardElements);
@@ -25,6 +25,10 @@ function startGame(audioSetMixed, audioElementIndex, cardElements) {
       soundCorrectElement.play();
       clickedElement.classList.add('card_choosen');
 
+      cardElements.forEach((element1) => {
+        element1.removeEventListener('click', listenerFunction);
+      });
+
       if (audioElementIndex > 0) {
         return setTimeout(() => {
           startGame(
@@ -39,10 +43,6 @@ function startGame(audioSetMixed, audioElementIndex, cardElements) {
       soundErrorElement.play();
     }
   }
-
-  cardElements.forEach((element) => {
-    element.removeEventListener('click', listenerFunction);
-  });
 
   cardElements.forEach((element) => {
     element.addEventListener('click', listenerFunction);
@@ -65,9 +65,7 @@ export default function initStartGameBtn() {
       isGameStarted = true;
       startBtnElement.innerHTML = createIconHtml('replay');
 
-      // for (let i = 0; i < audioSetMixed.length; i += 1) {
       startGame(audioSetMixed, audioSetMixed.length - 1, cardElements);
-      // }
     }
   });
 }

@@ -1,15 +1,8 @@
-// import Card from './js/components/statistics';
 import './sass/style.scss';
-// import createElement from './js/utils/createElement';
 import cardsData from './data/cards.data';
 import createMenu from './js/components/createMenu';
 import createCategoryPage from './js/components/createCategoryPage';
-// import changeRegimeFunction from './js/components/changeRegime';
 import changeCardsPageRegime from './js/components/changeCardsPageRegime';
-// import createIconHtml from './js/utils/createIcon';
-// import startGame from './js/components/startGame';
-
-// const card1 = new Card('bird');
 
 const application = {
   pages: {
@@ -44,7 +37,6 @@ const application = {
     createMenu(cardsData);
     createCategoryPage(cardsData);
     this.initRegimeToggler();
-    // this.initStartGameBtn();
   },
 
   initRegimeToggler() {
@@ -59,18 +51,6 @@ const application = {
       changeCardsPageRegime(this.properties.isRegimePlay);
     });
   },
-
-  // initStartGameBtn() {
-  //   this.elements.startBtnElement = document.querySelector('.start-game-btn');
-
-  //   this.elements.startBtnElement.addEventListener('click', () => {
-  //     if (!this.properties.isGameStarted) {
-  //       this.properties.isGameStarted = true;
-  //       this.elements.startBtnElement.innerHTML = createIconHtml('replay');
-  //       startGame();
-  //     }
-  //   });
-  // },
 };
 
 document.addEventListener('DOMContentLoaded', () => {
