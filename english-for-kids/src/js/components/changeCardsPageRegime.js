@@ -1,14 +1,18 @@
 import initStartGameBtn from './initStartGameBtn';
 
 export default function changeCardsPageRegime(isRegimePlay) {
+  const cardElements = document.querySelectorAll('.card');
   const cardsContentElements = document.querySelectorAll('.card__content');
   const cardsImageElements = document.querySelectorAll('.card__picture');
   const gameStatusElement = document.querySelector('.game-status');
   const cardsCategoriesContainer = document.querySelector('.cards-container_categories');
-  const isCateboriesVisible = !cardsCategoriesContainer.hasAttribute('hidden');
+  const startGameBtn = document.querySelector('.start-game-btn');
+  const scoreField = document.querySelector('.score');
+
+  const isCategoriesVisible = !cardsCategoriesContainer.hasAttribute('hidden');
 
   if (isRegimePlay) {
-    if (isCateboriesVisible) {
+    if (isCategoriesVisible) {
       return;
     }
 
@@ -28,6 +32,13 @@ export default function changeCardsPageRegime(isRegimePlay) {
     cardsContentElements.forEach((element) => {
       element.classList.remove('card__content_invisible');
     });
+
+    cardElements.forEach((element) => {
+      element.classList.remove('card_choosen');
+    });
+
+    startGameBtn.innerHTML = 'Start game';
+    scoreField.innerHTML = '';
 
     cardsImageElements.forEach((element) => {
       element.classList.remove('card__picture_big');

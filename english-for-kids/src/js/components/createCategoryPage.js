@@ -27,6 +27,8 @@ export default function createCategoryPage(cardsData) {
     createElement('div', 'card__title', cardCategory, cardContentElement);
     createElement('div', 'card__insides', `${cardSet.length} cards`, cardContentElement);
 
-    cardElement.addEventListener('click', () => renderCardsPage(cardSet));
+    cardElement.addEventListener('click', () => {
+      renderCardsPage(cardSet);
+    });
   }
 }
