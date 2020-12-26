@@ -97,10 +97,14 @@ body {
 }
 
 .sign-up_wallpaper {
-    background-image: url(./img/pexels-christina-morillo-1181675\ 1.png);
+    background-image: url(./img/sign-up_wallpaper.png);
     width: 1600px;
     height: 524px;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
 }
 
 .icon-undroid {
@@ -121,6 +125,7 @@ body {
     width: 8px;
     height: 0px;
     display: inline-block;
+    color: white;
 }
 
 h1 {
@@ -149,11 +154,7 @@ h3 {
     line-height: 20px;
 }
 
-.wrapper {
-    max-width: 1600px;
-    /* width: 1600px; */
-    height: 100%;
-}
+
 
 .first-page__content {
     display: flex;
@@ -174,16 +175,8 @@ h3 {
 
 }
 
-.community {
-    height: 504px;
-    background-color: #F5F6F7;
-}
 
-.footer {
-    background-color: #000000;
-    margin: auto;
-    color: #ffffff;
-}
+
 .header__wrapper {
     display: flex;
     align-items: center;
@@ -224,9 +217,9 @@ li {
 }
 
 .promo__button {
-    position: relative;
-    left: calc(50% - 85px);
-    bottom: calc(50% - 185px);
+    // position: relative;
+    // left: calc(50% - 85px);
+    // bottom: calc(50% - 185px);
 }
 .promo-button-new {
     display: flex;
@@ -344,26 +337,54 @@ color: #FFFFFF;
     top: 295px;
 }
 
-.community__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 298px;
-    height: 175px;
-    padding-left: 269px;
-    /* left: 269px; */
-    /* top: 295px; */
+.community {
+    height: 504px;
+    background-color: #F5F6F7;
+    width: 100%;
+
+
+    .wrapper {
+        margin: 0 auto;
+        max-width: 1600px;
+        /* width: 1600px; */
+        height: 100%;
+
+        .community-inner-block {
+            padding-left: 139px;
+            display: flex;
+            flex-direction: row;
+            height: 100%;
+            align-items: center;
+
+            .community__content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 298px;
+                height: 175px;
+
+                &_title{
+                    height: 20px;
+                    letter-spacing: 2.4px;
+                    text-transform: uppercase;
+                    line-height: 20px;
+                    font-size: 16px;
+                    font-weight: 500;
+                    font-style: normal;
+                }
+            }
+
+            .slider{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+        }
+    }
 }
 
-.community_content_title{
-    height: 20px;
-    letter-spacing: 2.4px;
-    text-transform: uppercase;
-    line-height: 20px;
-    font-size: 16px;
-    font-weight: 500;
-    font-style: normal;
-}
+
 
 
 .rappresent-image {
@@ -386,20 +407,7 @@ align-items: flex-end;
 letter-spacing: 1px;
 }
 
-.community_content_title {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 2.4px;
-    height: 20px;
-    left: calc(50% - 160px/2);
-    top: 65px;
-    text-transform: uppercase;
-}
+
 
 .rappresent_content_text {
     display: inline-block;
@@ -418,12 +426,6 @@ letter-spacing: 1px;
     top: 82px;
     display: flex;
     flex-direction: row;
-    align-items: center;
-}
-
-.slider{
-    display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
@@ -447,9 +449,109 @@ letter-spacing: 1px;
 }
 
 
-.community-inner-block {
+.implement {
+    height: 842px;
+
+    .wrapper {
+        max-width: 1600px;
+        /* width: 1600px; */
+        height: 100%;
+
+        .implement__content {
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            // column-gap: 139px;
+
+            .right-code{
+                margin-left: 139px;
+                width: 407px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+
+                &__title{
+                    margin-bottom: 20px;
+                }
+
+                &__content{
+                    margin-bottom: 30px;
+                }
+            }
+        }
+    }
+}
+
+.download {
+    height: 464px;
+    width: 1600px;
+
+    &-content{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 480px;
+        margin: 0 auto;
+
+
+        &__title{
+            padding-bottom: 20px;
+        }
+        &__text{
+            padding-bottom: 30px;
+        }
+    }
+
+}
+
+
+.btn-store {
+}
+.default {
+}
+.form-field {
+}
+.play-market {
+}
+.icon-undroid {
+}
+.hover {
+}
+.apple-store {
+}
+.icon-apple {
+}
+
+
+.footer {
+    width: 1600px;
+    height: 185px;
+    background-color: #000000;
+    margin: auto;
+    color: #ffffff;
+
+    .layout-3-column{
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+    }
+}
+
+.additional-menu{
+    width: 236px;
     display: flex;
     flex-direction: row;
-    height: 100%;
     align-items: center;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }
