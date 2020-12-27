@@ -1,0 +1,59 @@
+
+.listCountries {
+  display: flex;
+  flex-direction: column;
+}
+
+.info {
+  margin: 0 5px;
+  font-weight: bold;
+  color: red;
+}
+
+.li {
+  line-height: 2.5;
+  color: wheat;
+  border-bottom: 1px solid wheat;
+
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(53, 48, 48, 0.8);
+  }
+}
+
+.img {
+ margin-left: 5px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.buttons {
+  width: 80%;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 1%;
+}
+
+button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(189, 189, 189);
+  background-color: rgb(34, 34, 34);
+
+  border: 1px solid rgb(92, 92, 92);
+
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(53, 48, 48, 0.8);
+  }
+}
+
+input {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
+}

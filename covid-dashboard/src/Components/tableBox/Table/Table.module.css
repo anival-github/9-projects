@@ -1,0 +1,18 @@
+.tableContent {
+  width: 100%;
+}
+
+.dataType {
+  border: 0.5px solid #5c5c5c;
+  color: #bdbdbd;
+  padding: 5px;
+}
+
+.data {
+  border-left: 0.5px solid #5c5c5c;
+  border-right: 0.5px solid #5c5c5c;
+  border-bottom: 0.5px solid #5c5c5c;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+/*# sourceMappingURL=Table.module.css.map */

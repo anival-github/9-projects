@@ -1,0 +1,31 @@
+.tableBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  background-color: rgb(34, 34, 34);
+  color: white;
+}
+
+.toggler {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(189, 189, 189);
+  background-color: rgb(34, 34, 34);
+
+  border: 1px solid rgb(92, 92, 92);
+
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(53, 48, 48, 0.8);
+  }
+}
+
+.dataTypesButtons {
+  width: 80%;
+}

@@ -1,0 +1,46 @@
+.mapBox {
+    grid-area: 1/2/3/3;
+    overflow: hidden;
+    position: relative;
+}
+.mapComponent {
+    width: 50px;
+}
+.mapContainer {
+    height: 100%;
+}
+.mapSetValueBox {
+    position: absolute;
+    z-index: 99999;
+    top: 5px;
+    left: 20%;
+    display: flex;
+    gap: 3px;
+}
+.button {
+    box-sizing: border-box;
+    background: #222222;
+    border: 1px solid #222222;
+    border-radius: 3px;
+    color: #eeeeee;
+    padding: 0 5px;
+    transition: all 0.2s linear;
+    outline: none;
+}
+.button:hover {
+    cursor: pointer;
+    background: none;
+    border: 1px solid #b01f1f;
+    color: #b01f1f;
+}
+.legend {
+    background-color: #00000099;
+    padding: 2px;
+    border-radius: 5px;
+    color: #fcfcfc;
+    position: absolute;
+    bottom: 5px;
+    z-index: 999;
+    left: 5px;
+    font-size: 12px;
+}

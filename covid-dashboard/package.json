@@ -1,0 +1,41 @@
+{
+  "name": "covid-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.5.0",
+    "chart.js": "^2.9.4",
+    "geojson-world-map": "0.0.2",
+    "leaflet": "^1.7.1",
+    "node-sass": "^4.14.1",
+    "react": "^17.0.1",
+    "react-chartjs-3": "^2.7.7",
+    "react-dom": "^17.0.1",
+    "react-leaflet": "^3.0.4",
+    "react-scripts": "4.0.1",
+    "web-vitals": "^0.2.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.5.19"
+  }
+}
