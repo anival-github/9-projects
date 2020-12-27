@@ -1,193 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>webdev</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style_new.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>webdev</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="style_new.css">
-</head>
-
-<body>
-  <section class="first-page">
-    <div class="wrapper first-page-img">
-      <div class="first-page__content">
+  <body>
+    <div class="wrapper">
+      <section class="first-page">
         <header class="header">
-          <nav class="header__navigation">
-            <ul class="navigation">
-              <li class="text_navigation"><a href="#" style="color: #FFFFFF">About</a></li>
-              <li class="text_navigation">Syllabus</li>
-              <li><a href="#" class="logo"><img src="./img/Vector.png" alt="Vector"></a></li>
-              <li class="text_navigation">Projects</li>
-              <li class="text_navigation" style="padding-right: 0">FAQ</li>
+          <nav class="navigation">
+            <ul class="navigation__list">
+              <li class="navigation__item">
+                <a href="#">About</a>
+              </li>
+              <li class="navigation__item">
+                <a href="#">Syllabus</a>
+              </li>
+              <a href="#" class="logo logo_header">
+                <img src="./img/Vector.png" alt="Vector" />
+              </a>
+              <li class="navigation__item">
+                <a href="#">Projects</a>
+              </li>
+              <li class="navigation__item">
+                <a href="#">FAQ</a>
+              </li>
             </ul>
           </nav>
         </header>
 
         <div class="promo">
-          <div class="promo-title-new">
-            <h1>YOUR LIFE IS WEBDEV</h1>
-          </div>
-          <div class="promo-text-new">
-            <p style="margin: 0 0;">Whatever the approach to development may be, the final program must satisfy some
-              fundamental properties</p>
-          </div>
-          <div class="promo-button-new">
-            <button class="button button_colored">GET STARTED</button>
-          </div>
+          <h1 class="promo__title">YOUR LIFE IS WEBDEV</h1>
+          <span class="promo__description">
+            Whatever the approach to development may be, the final program must
+            satisfy some fundamental properties
+          </span>
+          <button class="button button_main">GET STARTED</button>
         </div>
 
-        <div class="ico-new">
-          <a href="#" class="ico_mail"><img src="./img/mail_fff.svg" alt="mail"></a>
-          <a href="#" class="ico_facebook"><img src="./img/facebook_fff.svg" alt="facebook"></a>
-          <a href="#" class="ico_instagram"><img src="./img/insta_fff.svg" alt="insta"></a>
-          <a href="#" class="ico_youtube"><img src="./img/telegram_fff.svg" alt="youtube"></a>
+        <div class="contacts">
+          <a class="contacts__link mail" href="#">
+            <img alt="mail" src="./img/mail_fff.svg" />
+          </a>
+          <a class="contacts__link facebook" href="#">
+            <img alt="facebook" src="./img/facebook_fff.svg" />
+          </a>
+          <a class="contacts__link instagram" href="#">
+            <img alt="insta" src="./img/insta_fff.svg" />
+          </a>
+          <a class="contacts__link youtube" href="#">
+            <img alt="youtube" src="./img/telegram_fff.svg" />
+          </a>
         </div>
-
-      </div>
-
-
-
+      </section>
     </div>
-  </section>
-  <section class="rappresent">
-    <div class="wrapper">
-      <div class="rappresent__content">
-        <div style="width: 367px;">
-          <h2 class="rappresent_content_title">Rappresent your idea with a smart Design</h2>
-        </div>
-        <div class="rappresent_content_text_position">
-          <p class="rappresent_content_text">Tasks accompanying and related to programming include: testing,
-            debugging, source code maintenance, implementation of build systems, and management of derived
-            artifacts, such as the machine code of computer programs.</p>
-        </div>
-        <button class="button button_colored"
-          style="display: flex; flex-direction: row; position: relative; left: 0px; top: 135px;">GET STARTED</button>
-      </div>
-      <div class="rappresent-image">
-      </div>
-    </div>
-  </section>
-  <section class="community">
 
     <div class="wrapper">
+      <section class="rappresent">
+        <div class="rappresent__content">
+          <h2 class="rappresent__title">
+            Rappresent your idea with a smart Design
+          </h2>
+          <span class="rappresent__description">
+            Tasks accompanying and related to programming include: testing,
+            debugging, source code maintenance, implementation of build systems,
+            and management of derived artifacts, such as the machine code of
+            computer programs.
+          </span>
 
-      <div class="community-inner-block">
+          <button class="button button_main">GET STARTED</button>
+        </div>
+        <div class="rappresent__image"></div>
+      </section>
+    </div>
 
+    <div class="wrapper">
+      <section class="community">
         <div class="community__content">
-          <span class="userpic-wrapper"></span>
-          <h3 class="community_content_title">
-            our community
-          </h3>
-          <p class="rappresent_content_text">
-            A hacker is any skilled computer expert that uses their technical knowledge to overcome a problem,
-            but it can also mean a security hacker in common language
+          <div class="community__picture"></div>
+          <h3 class="community__title">our community</h3>
+          <p class="community__description">
+            A hacker is any skilled computer expert that uses their technical
+            knowledge to overcome a problem, but it can also mean a security
+            hacker in common language
           </p>
         </div>
 
-
         <div class="slider">
-          <div class="slider-nav-items">
-            <span class="ico_arrow-left"></span>
+          <div class="slider__navigation">
+            <span class="arrow arrow-left"></span>
             <div class="pagination">
               <p>1</p>
-              <span class="ico_divider-icon"></span>
+              <p>/</p>
               <p>5</p>
             </div>
-            <span class="ico_arrow-right"></span>
-          </div>
-          <div class="slider-items">
-            <span class="slider-item_1" style="margin-right: 30px"></span>
-            <span class="slider-item_2" style="margin-right: 30px"></span>
-            <span class="slider-item_3"></span>
+            <span class="arrow arrow-right"></span>
           </div>
 
+          <div class="slider__images">
+            <span class="slider__picture slider__picture_1"></span>
+            <span class="slider__picture slider__picture_2"></span>
+            <span class="slider__picture slider__picture_3"></span>
+          </div>
         </div>
-
-
-      </div>
+      </section>
     </div>
-  </section>
 
-  <section class="implement">
     <div class="wrapper">
-      <div class="implement__content">
-
-        <span class="slider-item_2-1"></span>
-
-        <div class="right-code">
-          <h2 class="right-code__title">Implement right Code</h2>
-          <p class="right-code__content">These might be considered part of the programming process, but often the term
-            software development is
-            used for this larger process with the term programming, implementation</p>
-          <div class="promo__button">
-            <button class="button button_colored">get started</button>
-          </div>
+      <section class="implement">
+        <span class="implement__image"></span>
+        <div class="implement__content">
+          <h2 class="implement__title">Implement right Code</h2>
+          <span class="implement__description">
+            These might be considered part of the programming process, but often
+            the term software development is used for this larger process with
+            the term programming, implementation
+          </span>
+          <button class="button button_main">learn more</button>
         </div>
+      </section>
+    </div>
 
-
+    <section class="sign-up">
+      <div class="sign-up__content">
+        <h2 class="sign-up__title">sign up for our newsletter</h2>
+        <form class="sign-up__form" action="POST">
+          <input
+            class="sign-up__input"
+            type="email"
+            name="email"
+            placeholder="E-mail"
+          />
+          <button class="button button_submit" type="submit">
+            <img src="./img/check-icon.svg" alt="check-icon" />
+          </button>
+        </form>
       </div>
-  </section>
+    </section>
 
-  <section class="sign-up">
     <div class="wrapper">
-      <div class="sign-up_wallpaper">
-        <h2>sign up for our newsletter</h2>
-        <div class="sign-up__form">
-          <form action="POST">
-            <input type="email" name="email" placeholder="E-mail">
-            <button class="button btn_submit" type="submit">
-              <span class="check-icon"></span>
+      <section class="download">
+        <div class="download__content">
+          <h2 class="download__title">Download the App</h2>
+          <span class="download__description">
+            Machine code was the language of early programs, written in the
+            instruction set of the particular machine, often in binary notation.
+          </span>
+          <div class="download__buttons">
+            <button class="button button_download">
+              <div class="button__description">apple store</div>
+              <div class="button_platform">
+                <img src="./img//icon-apple.png" alt="apple-icon" />
+              </div>
             </button>
-          </form>
+            <button class="button button_download">
+              <div class="button__description">play market</div>
+              <div class="button_platform">
+                <img src="./img/icon-android.png" alt="android-icon" />
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <div class="layout-3-column">
+        <ul class="additional-menu">
+          <li>
+            <a href="#">Credits</a>
+          </li>
+          <span>|</span>
+          <li>
+            <a href="#">Privacy</a>
+          </li>
+          <span>|</span>
+          <li>
+            <a href="#">Our teams</a>
+          </li>
+        </ul>
+
+        <a href="#" class="logo">
+          <img src="./img/Vector.png" alt="Vector" />
+        </a>
+
+        <div class="copyright">
+          <p>by TonYem for RSS at 2020</p>
         </div>
       </div>
-    </div>
-  </section>
-
-
-  <section class="download">
-    <div class="download-content">
-      <h2 class="download-content__title">Download the App</h2>
-      <p class="download-content__text">Machine code was the language of early programs, written in the instruction set
-        of the particular
-        machine, often in binary notation.</p>
-      <div class="btn-store">
-        <button class="default">
-          <span class="form-field play-market">play market</span>
-          <span class="icon-undroid"></span>
-        </button>
-        <button class="hover">
-          <span class="form-field apple-store">apple store</span>
-          <span class="icon-apple"></span>
-        </button>
-      </div>
-    </div>
-  </section>
-
-
-  <footer class="footer">
-    <div class="layout-3-column">
-        <ul class="additional-menu">
-          <li><a href="#">Credits</a></li>
-          <li>
-            <span class="mnu-items-divider"></span>
-          </li>
-          <li><a href="#">Privacy</a></li>
-          <li>
-            <span class="mnu-items-divider"></span>
-          </li>
-          <li><a href="#">Our teams</a></li>
-        </ul>
-      <a href="#" class="logo"><img src="./img/Vector.png" alt="Vector"></a>
-      <div class="copyright">
-        <p>by TonYem for RSS at 2020</p>
-      </div>
-    </div>
-  </footer>
-</body>
-
+    </footer>
+  </body>
 </html>
