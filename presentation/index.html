@@ -16,9 +16,380 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<a href="https://reactjs.org/">
+						<img
+							src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K"
+							alt="reveal.js logo" style="height: 180px; margin: 0 auto 4rem auto; background: transparent;"
+							class="demo-logo">
+						<h2>React</h2>
+					</a>
+					<p>Basic tutorial for beginners in 10 min</p>
+					<p>
+						<small>Created by <a href="https://github.com/anival-github">Valentin Anikin</a></small>
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>What is React?</h2>
+						<p>
+							A JavaScript library for building user interfaces
+						</p>
+					</section>
+					<section>
+						<p>
+							One of the most popular JavaScript library with over
+						</p>
+						<p class="r-fit-text">
+							160,000 stars on
+							<a href="https://github.com/facebook/react">
+								GitHub
+							</a>
+						</p>
+						</p>
+					</section>
+					<section>
+						<p class="r-fit-text">
+							Not a framework
+						</p>
+						<p class="r-fit-text">
+							(unlike Angular, which is more opinionated)
+						</p>
+					</section>
+					<section>
+						<p class="r-fit-text">
+							Open-source project created by
+						</p>
+						<p class="r-fit-text">
+							<a href="https://www.facebook.com/">
+								Facebook
+							</a>
+						</p>
+					</section>
+
+					<section>
+						<p class="r-fit-text">
+							React is the view layer of an application based on
+						</p>
+						<p class="r-fit-text">
+							<a href="https://ru.wikipedia.org/wiki/Model-View-Controller">
+								Model View Controller
+							</a>
+						</p>
+					</section>
+
+					<section>
+						<p>
+							React efficiently rerenders Single Page Application using <a
+								href="https://reactjs.org/docs/faq-internals.html">Virtual DOM concept</a>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<!-- <section>
+							<p>
+								One of the most important aspects of React is the fact that you can create components, which are like custom, reusable HTML elements, to quickly and efficiently build user interfaces. React also streamlines how data is stored and handled, using state and props.
+							</p>
+						</section> -->
+					<section>
+						<h2>Setup and Installation</h2>
+						<p>You can use
+							<a href="https://github.com/facebook/create-react-app">
+								Create React App
+							</a>
+							- an environment created by Facebook pre-configured with everything you need to build a React app
+						</p>
+					</section>
+					<section>
+						<h2>Prerequisites</h2>
+						<p style="display: inline-block;" class="fragment fade-left">
+							You need
+							<a href="https://nodejs.org/en/">
+								Node 10.16.0
+							</a>
+							or later version on your local development machine (but it’s not required on the server).
+						</p>
+					</section>
+					<section>
+						<h2>Choose one of the following methods:</h2>
+						<ul>
+							<li>npx</li>
+							<li>npm</li>
+							<li>Yarn</li>
+						</ul>
+						<p class="r-fit-text">(run the code in your terminal one directory up from where you want the project to live)
+						</p>
+					</section>
+					<section>
+						<h2 data-id="code-title">
+							<a href="https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b">
+								npx
+							</a>
+						</h2>
+						<p>
+							package runner tool coming with npm 5.2+ and higher
+						</p>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-noescape>
+								npx create-react-app my-app
+							</code></pre>
+					</section>
+
+					<section>
+						<h2 data-id="code-title">npm</h2>
+						<p>npm init is available in npm 6+</p>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-noescape>
+								npm init react-app my-app
+							</code></pre>
+					</section>
+
+					<section>
+						<h2 data-id="code-title">Yarn</h2>
+						<p>
+							<a href="https://classic.yarnpkg.com/en/docs/cli/create/">
+								yarn create
+							</a>
+							is available in Yarn 0.25+
+						</p>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-noescape>
+								yarn create react-app my-app
+							</code></pre>
+					</section>
+
+					<section>
+						<small>It will create a directory "my-app" inside the current folder with initial project structure and
+							transitive dependencies </small>
+						<img style="background: rgba(255,255,255,0.1);" data-src="./examples/assets/image3.png" alt="Down arrow">
+					</section>
+
+					<section>
+						<span>Inside the newly created project run some built-in commands:</span>
+						<pre><code data-trim data-noescape>
+								npm start
+							</code></pre>
+						or
+						<pre><code data-trim data-noescape>
+								yarn start
+							</code></pre>
+						to run the app in development mode.
+						Open
+						<a href="http://localhost:3000">http://localhost:3000</a>
+						to view it in the browser
+					</section>
+
+					<section>
+						<small>Once you run this command, a new window will popup at localhost:3000 with your new React app and
+							further instructions</small>
+						<img style="background: rgba(255,255,255,0.1);" data-src="./examples/assets/welcome-page.png"
+							alt="Down arrow">
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>
+							Introducing JSX
+						</h2>
+					</section>
+					<section data-auto-animate>
+						<small class="r-fit-text">In the src/App.js file you will see the following code</small>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|6-22"><script type="text/template">
+							import logo from './logo.svg';
+							import './App.css';
+
+							function App() {
+								return (
+									<div className="App">
+										<header className="App-header">
+											<img src={logo} className="App-logo" alt="logo"/>
+											<p>
+												Edit <code>src/App.js</code> and save to reload.
+											</p>
+											<a
+												className="App-link"
+												href="https://reactjs.org"
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												Learn React
+											</a>
+										</header>
+									</div>
+								);
+							}
+							export default App;
+						</script></code></pre>
+					</section>
+					<section>
+						<h2>JSX</h2>
+						<p>
+							- is a syntax extension to JavaScript, that looks like combination of JS and HTML
+						</p>
+						<p>
+							React doesn’t require using JSX, but it is helpful as a visual aid when working with UI inside the JS code
+						</p>
+					</section>
+
+					<section>
+						<p>
+							Instead of artificially separating technologies by putting markup and logic in separate files
+						</p>
+						<p>
+							React <a href="https://en.wikipedia.org/wiki/Separation_of_concerns">separates concerns</a> with loosely
+							coupled units called “components” that contain both
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section data-auto-animate>
+						<h2 data-id="code-title">Component</h2>
+						<small class="r-fit-text">We can change the src/App.js file as follows:</small>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|2|2,7"><script type="text/template">
+							import './App.css';
+							import Header from './Header'
+
+							function App() {
+								return (
+									<div className="App">
+										<Header />
+									</div>
+								);
+							}
+
+							export default App;
+						</script></code></pre>
+					</section>
+					<section data-auto-animate>
+						<small class="r-fit-text">...and create Header.js file at the same directory</small>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|3|23"><script type="text/template">
+							import logo from './logo.svg';
+
+							function Header() {
+
+								return (
+									<header className="App-header">
+										<img src={logo} className="App-logo" alt="logo" />
+										<p>
+											Edit <code>src/App.js</code> and save to reload.
+										</p>
+										<a
+											className="App-link"
+											href="https://reactjs.org"
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											Learn React
+										</a>
+									</header>
+								);
+							}
+
+							export default Header;
+						</script></code></pre>
+					</section>
+
+					<section>
+						<h2>React function component</h2>
+						<span style="display: inline-block;" class="fragment fade-right">- JS function</span>
+						<span style="display: inline-block;" class="fragment fade-right">- accepts a single “props” object argument with data</span>
+						<span style="display: inline-block;" class="fragment fade-right">- returns a React element</span>
+					</section>
+				</section>
+
+				<section>
+					<section data-auto-animate>
+						<h2 data-id="code-title">Props</h2>
+						<small>
+							When React sees an element representing a user-defined component, it passes JSX attributes and children to this component as a single object. We call this object “props”</small>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|12|1, 12"><script type="text/template">
+							function Clock(props) {
+								return (
+									<div>
+										<h1>Hello, world!</h1>
+										<h2>It is {props.date.toLocaleTimeString()}.</h2>
+									</div>
+								);
+							}
+
+							function tick() {
+								ReactDOM.render(
+									<Clock date={new Date()} />,
+									document.getElementById('root')
+								);
+							}
+
+							setInterval(tick, 1000);
+						</script></code></pre>
+					</section>
+					<section>
+						<h2>In this example:</h2>
+						<p style="display: inline-block;" class="fragment fade-right">1. We call ReactDOM.render() with the Clock element</p>
+						<p style="display: inline-block;" class="fragment fade-right">2. React calls the Clock component with {name: 'Sara'} as props</p>
+						<p style="display: inline-block;" class="fragment fade-right">3. Clock component returns a div element as the result</p>
+						<p style="display: inline-block;" class="fragment fade-right">4. React DOM efficiently updates the DOM</p>
+					</section>
+				</section>
+
+				<section>
+					<section data-auto-animate>
+						<h2 data-id="code-title">Styles</h2>
+						<span>Main methods of styling</span>
+					</section>
+
+					<section data-auto-animate>
+						<h2 class="r-fit-text">Method #1: Inline styling of React components</h2>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|11"><script type="text/template">
+							function Header() {
+
+								const headerStyle = {
+									padding: "10px 20px",
+									textAlign: "center",
+									color: "white",
+									fontSize: "22px"
+								}
+
+								return (
+									<header className="App-header" style={headerStyle}>
+										//...
+									</header>
+								);
+							}
+
+							export default Header;
+						</script></code></pre>
+					</section>
+
+					<section data-auto-animate>
+						<h2 class="r-fit-text">Method #2: CSS Modules</h2>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|5"><script type="text/template">
+							import styles from ‘./styles.css’;
+
+							function Header() {
+								return (
+									<header style={styles.headerStyle}>
+										//...
+									</header>
+								);
+							}
+
+							export default Header;
+						</script></code></pre>
+					</section>
+
+				</section>
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+					<span>
+						More information about React you will find
+						<a href="https://reactjs.org/">here</a>
+					</span>
+				</section>
+
 			</div>
+
 		</div>
 
 		<script src="dist/reveal.js"></script>
