@@ -1,5 +1,2 @@
-Create a markdown file presentation.md and fill it with:
-a link to your YouTube video;
-a link to your Reveal presentation's deploy;
-(optional) a link to the transcript of your presentation;
-(optional) your comments;
+Link to the YouTube video: https://youtu.be/t0eFDU4ZHOk
+Link to your Reveal presentation's deploy: https://anival-github-presentation.netlify.app/#/7

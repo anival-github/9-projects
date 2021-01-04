@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>React tutorial</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
@@ -28,6 +28,10 @@
 					<p>
 						<small>Created by <a href="https://github.com/anival-github">Valentin Anikin</a></small>
 					</p>
+					<aside class="notes">
+						Hello!
+						My name is Valentin Anikin and I am going to discuss with you some basic information about React. I hope it will help beginners to basically understand purposes for which this technology was created and how you can use it.
+					</aside>
 				</section>
 
 				<section>
@@ -56,6 +60,9 @@
 						<p class="r-fit-text">
 							(unlike Angular, which is more opinionated)
 						</p>
+						<aside class="notes">
+							-	It is positioned as a library, but not a framework.
+						</aside>
 					</section>
 					<section>
 						<p class="r-fit-text">
@@ -66,6 +73,9 @@
 								Facebook
 							</a>
 						</p>
+						<aside class="notes">
+							-	It was created by Facebook, and it is one of the advantages of this technologies, as you know, that it will be supported and updated in future.
+						</aside>
 					</section>
 
 					<section>
@@ -77,6 +87,9 @@
 								Model View Controller
 							</a>
 						</p>
+						<aside class="notes">
+							MVC generally imply that data should be delivered to users in the form suitable for users, but it should be stored and processed in the way suitable for business.  So while developing an application we should separately organize business layer of an application which will process and store data and user interface which will display data for users. And we can effectively create such an application using React.
+						</aside>
 					</section>
 
 					<section>
@@ -84,15 +97,13 @@
 							React efficiently rerenders Single Page Application using <a
 								href="https://reactjs.org/docs/faq-internals.html">Virtual DOM concept</a>
 						</p>
+						<aside class="notes">
+							-	React uses Virtual DOM concept which allows to effectively render single page application that is application having one html document and a script with logic of how to change it.
+						</aside>
 					</section>
 				</section>
 
 				<section>
-					<!-- <section>
-							<p>
-								One of the most important aspects of React is the fact that you can create components, which are like custom, reusable HTML elements, to quickly and efficiently build user interfaces. React also streamlines how data is stored and handled, using state and props.
-							</p>
-						</section> -->
 					<section>
 						<h2>Setup and Installation</h2>
 						<p>You can use
@@ -101,6 +112,9 @@
 							</a>
 							- an environment created by Facebook pre-configured with everything you need to build a React app
 						</p>
+						<aside class="notes">
+							The simplest way is to use the command Create React App.
+						</aside>
 					</section>
 					<section>
 						<h2>Prerequisites</h2>
@@ -109,8 +123,11 @@
 							<a href="https://nodejs.org/en/">
 								Node 10.16.0
 							</a>
-							or later version on your local development machine (but it’s not required on the server).
+							or later version on your local development machine
 						</p>
+						<aside class="notes">
+							You need the Node installed on your local computer. You can follow the ling I put into this slide to install it.
+						</aside>
 					</section>
 					<section>
 						<h2>Choose one of the following methods:</h2>
@@ -121,6 +138,9 @@
 						</ul>
 						<p class="r-fit-text">(run the code in your terminal one directory up from where you want the project to live)
 						</p>
+						<aside class="notes">
+							After you installed Node JS, you should open your terminal and there you should open the folder when you want to create your new application.
+						</aside>
 					</section>
 					<section>
 						<h2 data-id="code-title">
@@ -155,12 +175,20 @@
 						<pre data-id="code-animation"><code class="hljs" data-trim data-noescape>
 								yarn create react-app my-app
 							</code></pre>
+							<aside class="notes">
+								In this folder you should run one of the following commands in your terminal: NPX, NPM or yarn. NPX and NPM must be already installed on your computer along with Node, YARN you should download separately.
+							</aside>
+
 					</section>
 
 					<section>
 						<small>It will create a directory "my-app" inside the current folder with initial project structure and
 							transitive dependencies </small>
 						<img style="background: rgba(255,255,255,0.1);" data-src="./examples/assets/image3.png" alt="Down arrow">
+
+						<aside class="notes">
+							Once you have run one of these commands, you will see the new folder downloaded with name as you call it in the command you have run before. This is your React project.
+							This folder will have the structure as you can see here. In folder public you will see the index.html file which will be the main html file of your project. Other files of our project will be stored in SRC folder.						</aside>
 					</section>
 
 					<section>
@@ -176,6 +204,10 @@
 						Open
 						<a href="http://localhost:3000">http://localhost:3000</a>
 						to view it in the browser
+						<aside class="notes">
+							In this folder you can run one of the following commands to look at your application in browser.
+						</aside>
+
 					</section>
 
 					<section>
@@ -183,6 +215,9 @@
 							further instructions</small>
 						<img style="background: rgba(255,255,255,0.1);" data-src="./examples/assets/welcome-page.png"
 							alt="Down arrow">
+							<aside class="notes">
+								And you fill see the application template and instruction how to proceed.
+							</aside>
 					</section>
 				</section>
 
@@ -191,6 +226,9 @@
 						<h2>
 							Introducing JSX
 						</h2>
+						<aside class="notes">
+							When you open App.js you will see a new syntax, which is called JSX.
+						</aside>
 					</section>
 					<section data-auto-animate>
 						<small class="r-fit-text">In the src/App.js file you will see the following code</small>
@@ -220,6 +258,10 @@
 							}
 							export default App;
 						</script></code></pre>
+						<aside class="notes">
+							From one point of view it looks like a standard JavaScript function: we see the key word function, name of the function, some module structure (there are import and export here).
+							But this function returns something strange. It looks like HTML but not an HTML.
+						</aside>
 					</section>
 					<section>
 						<h2>JSX</h2>
@@ -229,6 +271,9 @@
 						<p>
 							React doesn’t require using JSX, but it is helpful as a visual aid when working with UI inside the JS code
 						</p>
+						<aside class="notes">
+							So what is JSX. It is not required to use it, but it is really helpful while using react.
+						</aside>
 					</section>
 
 					<section>
@@ -260,7 +305,11 @@
 
 							export default App;
 						</script></code></pre>
+						<aside class="notes">
+							To understand the component concept, we will change our app.js file as follows. Instead of the tag “header” we will create some new tag “Header” starting with a capital letter and will import function Header from the file with name Header from the current directory.
+						</aside>
 					</section>
+
 					<section data-auto-animate>
 						<small class="r-fit-text">...and create Header.js file at the same directory</small>
 						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|3|23"><script type="text/template">
@@ -288,6 +337,9 @@
 
 							export default Header;
 						</script></code></pre>
+						<aside class="notes">
+							Also we will create Header.js file in the SRC directory, and we will copy the header tag with it’s previous content.
+						</aside>
 					</section>
 
 					<section>
@@ -299,6 +351,7 @@
 				</section>
 
 				<section>
+
 					<section data-auto-animate>
 						<h2 data-id="code-title">Props</h2>
 						<small>
@@ -322,7 +375,14 @@
 
 							setInterval(tick, 1000);
 						</script></code></pre>
+						<aside class="notes">
+							Is one single argument containing all the data passed from one React component to another.
+							We can pass data to another react component by adding a new attribute when we call component in our conde, so the name of the attribute will be the name of property inside props, and data included into braces will be the value of the property inside props.
+
+							We can call data inside the React component by calling props, dot and name of the attribute we passed when calling React component.
+						</aside>
 					</section>
+
 					<section>
 						<h2>In this example:</h2>
 						<p style="display: inline-block;" class="fragment fade-right">1. We call ReactDOM.render() with the Clock element</p>
@@ -359,12 +419,16 @@
 
 							export default Header;
 						</script></code></pre>
+
+						<aside class="notes">
+							Inline styling. You can create object and pass to it CSS properties. And you can add attribute style to the tag and put the name of the object with CSS properties into braces.
+						</aside>
 					</section>
 
 					<section data-auto-animate>
 						<h2 class="r-fit-text">Method #2: CSS Modules</h2>
 						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|5"><script type="text/template">
-							import styles from ‘./styles.css’;
+							import styles from ‘./styles.module.css’;
 
 							function Header() {
 								return (
@@ -376,6 +440,9 @@
 
 							export default Header;
 						</script></code></pre>
+						<aside class="notes">
+							CSS module. It is commonly accepted that CSS file which is CSS module we name with the key word module.
+						</aside>
 					</section>
 
 				</section>
@@ -386,6 +453,8 @@
 						More information about React you will find
 						<a href="https://reactjs.org/">here</a>
 					</span>
+					<aside class="notes">
+						This is all the information I wanted to share with you. You can learn more about REACT on the official REACT webpage. I linked a presentation to this video with all links you can follow. Enjoy.  					</aside>
 				</section>
 
 			</div>
